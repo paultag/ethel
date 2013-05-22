@@ -1,9 +1,20 @@
 from ethel.utils import run_command
+from ethel.error import EthelError
+
 import configparser
 import contextlib
 import shutil
 import sys
 import os
+
+
+class EthelSubprocessError(EthelError):
+    def __init__(self, out, err, ret, cmd):
+        super(EthelError, self).__init__()
+        self.out = out
+        self.err = err
+        self.ret = ret
+        self.cmd = cmd
 
 
 def get_session_file(session):
@@ -38,11 +49,7 @@ def safe_run(cmd, expected=0):
     out, err = (x.decode('utf-8') for x in (out, err))
 
     if ret != expected:
-        e = Exception("Bad command")
-        e.out = out
-        e.err = err
-        e.ret = ret
-        e.cmd = cmd
+        e = EthelSubprocessError(out, err, ret, cmd)
         raise e
 
     return out, err
@@ -87,9 +94,22 @@ def copy(session, source, dest):
 
 def update(chroot):
     with schroot(chroot, source=True) as session:
+        print("Updating")
         scmd(session, ['apt-get', 'update'], user='root')
+        print("Upgrading")
         scmd(session, ['apt-get', '-y', 'dist-upgrade'], user='root')
+        print("Finished update.")
 
 
 def run_update():
-    update(*sys.argv[1:])
+    try:
+        update(*sys.argv[1:])
+    except EthelSubprocessError as e:
+        print(e.cmd)
+        print()
+        print(e.out)
+        print()
+        print(e.err)
+        print()
+        print(e.ret)
+        raise
