@@ -7,7 +7,12 @@ import os
 import re
 
 
+LINE_INFO = re.compile(
+    r"(?P<minutes>\d+)m(?P<sec>(\d(\.?))+)s (?P<severity>\w+): (?P<info>.*)")
+
+
 def piuparts(chroot, package):
+    analysis = generate_analysis("piuparts", "unstable", package)
     tarball = get_tarball(chroot)
 
     name = os.path.basename(tarball)
@@ -30,6 +35,7 @@ def piuparts(chroot, package):
 
         failed = False
         try:
+            print("Running Piuparts..")
             out, err = scmd(session, [
                 'piuparts',
                     '-b', internal_path,
@@ -41,11 +47,10 @@ def piuparts(chroot, package):
             out, err = e.out, e.err
             failed = True
 
-        return parse_log(out.splitlines(), package)
+        for x in parse_log(out.splitlines(), package):
+            analysis.results.append(x)
+    return analysis
 
-
-LINE_INFO = re.compile(
-    r"(?P<minutes>\d+)m(?P<sec>(\d(\.?))+)s (?P<severity>\w+): (?P<info>.*)")
 
 def parse_log(lines, path):
     obj = None
@@ -86,6 +91,7 @@ def parse_log(lines, path):
 
         info = match.groupdict()
         if info['severity'] in ['DEBUG', 'DUMP', 'INFO']:
+            cur_msg = ""
             continue
 
         if obj:
