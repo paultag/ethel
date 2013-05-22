@@ -15,6 +15,15 @@ def get_mount_point(session):
     return obj['mount-location']
 
 
+def get_tarball(chroot):
+    cfg = configparser.ConfigParser()
+    fil = '/etc/schroot/chroot.d/%s' % (chroot)
+    if cfg.read(fil) == []:
+        raise KeyError("No such session: `%s' - %s" % (session, fil))
+    obj = cfg[chroot]
+    return obj['file']
+
+
 def safe_run(cmd, expected=0):
     out, err, ret = run_command(cmd)
     out, err = (x.decode('utf-8') for x in (out, err))

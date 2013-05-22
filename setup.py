@@ -24,6 +24,7 @@ setup(
             'ethel-next = ethel.cli:next',
             'ethel-close = ethel.cli:close',
             'ethel-adequate = ethel.commands.adequate:main',
+            'ethel-piuparts = ethel.commands.piuparts:main',
         ],
     }
 )

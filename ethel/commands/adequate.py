@@ -60,6 +60,7 @@ def adequate(chroot, package):
             analysis.results.append(issue)
         return analysis
 
+
 def main():
     import sys
     output = open(sys.argv[3], 'wb')
