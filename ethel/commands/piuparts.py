@@ -1,4 +1,6 @@
-from ethel.chroot import schroot, copy, scmd, get_tarball, EthelSubprocessError
+from ethel.chroot import schroot, copy, scmd, get_tarball
+from ethel.utils import EthelSubprocessError
+
 from firehose.model import Issue, Message, File, Location
 from storz.wrapper import generate_analysis
 

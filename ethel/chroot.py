@@ -1,20 +1,10 @@
-from ethel.utils import run_command
-from ethel.error import EthelError
+from ethel.utils import run_command, safe_run, EthelSubprocessError
 
 import configparser
 import contextlib
 import shutil
 import sys
 import os
-
-
-class EthelSubprocessError(EthelError):
-    def __init__(self, out, err, ret, cmd):
-        super(EthelError, self).__init__()
-        self.out = out
-        self.err = err
-        self.ret = ret
-        self.cmd = cmd
 
 
 def get_session_file(session):
@@ -42,17 +32,6 @@ def get_tarball(chroot):
         raise KeyError("No such session: `%s' - %s" % (session, fil))
     obj = cfg[chroot]
     return obj['file']
-
-
-def safe_run(cmd, expected=0):
-    out, err, ret = run_command(cmd)
-    out, err = (x.decode('utf-8') for x in (out, err))
-
-    if ret != expected:
-        e = EthelSubprocessError(out, err, ret, cmd)
-        raise e
-
-    return out, err
 
 
 def scmd(session, command, expected=0, user=None):

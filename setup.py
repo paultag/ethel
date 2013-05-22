@@ -20,11 +20,13 @@ setup(
     platforms=['any'],
     entry_points = {
         'console_scripts': [
-            'ethel-submit = ethel.cli:submit',
             'ethel-next = ethel.cli:next',
+            'etheld = ethel.daemon:daemon',
             'ethel-close = ethel.cli:close',
+            'ethel-submit = ethel.cli:submit',
             'ethel-dget-url = ethel.cli:dget',
             'ethel-update = ethel.chroot:run_update',
+            'ethel-sbuild = ethel.commands.sbuild:main',
             'ethel-adequate = ethel.commands.adequate:main',
             'ethel-piuparts = ethel.commands.piuparts:main',
         ],
