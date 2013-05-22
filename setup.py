@@ -23,6 +23,7 @@ setup(
             'ethel-submit = ethel.cli:submit',
             'ethel-next = ethel.cli:next',
             'ethel-close = ethel.cli:close',
+            'ethel-adequate = ethel.commands.adequate:main',
         ],
     }
 )
