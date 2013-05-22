@@ -60,9 +60,7 @@ def scmd(session, command, expected=0, user=None):
 def schroot(chroot, source=False):
     session = "ethel-%s" % (os.getpid())
     chroot_name = chroot
-    os.environ['CHROOT_FILE_REPACK'] = "false"
     if source:
-        os.environ['CHROOT_FILE_REPACK'] = "true"
         chroot_name = "source:%s" % (chroot_name)
 
     out, err = safe_run(['schroot', '-b', '-n', session, '-c', chroot_name])
@@ -72,7 +70,10 @@ def schroot(chroot, source=False):
         print("[ethel] Started session: %s" % (session))
         yield session
     except Exception:
-        os.environ['CHROOT_FILE_REPACK'] = "false"
+        if source:
+            print("[ethel] Session crashed. Aborting repack")
+            safe_run(['sudo', 'schroot-abort-repack', session])
+            # name ALL=NOPASSWD: /usr/local/bin/schroot-abort-repack
         raise
     finally:
         out, err = safe_run(['schroot', '-e', '-c', session])
