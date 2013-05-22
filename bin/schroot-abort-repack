@@ -1,18 +1,17 @@
-#!/usr/bin/env python3
-import configparser
-import sys
+#!/bin/bash
 
-if len(sys.argv) <= 1:
-    print("need a session id")
-    sys.exit(1)
+CHROOT=$1
 
-session = sys.argv[1]
+if [ "x${CHROOT}" = "x" ]; then
+    echo "Need a session"
+    exit 1
+fi
 
-cfg = configparser.ConfigParser()
-path = "/var/lib/schroot/session/%s" % (session)
-if cfg.read(path) == []:
-    print("Need a valid session")
-    sys.exit(2)
+FPATH=/var/lib/schroot/session/${CHROOT}
 
-cfg[session]['file-repack'] = 'false'
-cfg.write(open(path, 'w'))
+if [ ! -e ${FPATH} ]; then
+    echo "No such session"
+    exit 2
+fi
+
+sed 's/file-repack=true/file-repack=false/g' -i ${FPATH}
