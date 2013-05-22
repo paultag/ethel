@@ -1,0 +1,56 @@
+#!/bin/bash
+set -e
+
+SUITE=$1
+MIRROR=http://debian.lcs.mit.edu/debian/
+OUTPUT="/var/lib/ethel/chroots/"
+VARIANT="buildd"
+TARBALL="${OUTPUT}/${SUITE}.tar.gz"
+
+
+if [ -e ${TARBALL} ]; then
+    echo "Rebuild image? C-c to stop."
+    read FOO
+    sudo rm -rf ${TARBALL}
+fi
+
+
+if [ "x$SUITE" = "x" ]; then
+    echo "$0 unstable"
+    exit 1
+fi
+
+
+WHERE=$(mktemp -d)
+
+POP=$(pwd)
+cd ${WHERE}
+
+TARGET="chroot"
+
+sudo debootstrap \
+    --verbose \
+    --variant="$VARIANT" \
+    "$SUITE" \
+    "." \
+    "$MIRROR"
+
+sudo tar -zcf ${TARBALL} .
+
+cd $POP
+sudo rm -rf ${WHERE}
+
+echo ""
+cat <<EOF
+[${SUITE}-$(dpkg-architecture -qDEB_BUILD_ARCH)]
+type=file
+description=Ethel Chroot
+file=${TARBALL}
+groups=root,sbuild
+root-groups=root,sbuild
+source-groups=root,sbuild
+source-root-groups=root,sbuild
+EOF
+echo ""
+
+exit 0

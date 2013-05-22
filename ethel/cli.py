@@ -1,4 +1,4 @@
-from ethel.client import submit_report, next_job, close_job
+from ethel.client import submit_report, next_job, close_job, dget_url
 import sys
 
 
@@ -12,3 +12,7 @@ def next():
 
 def close():
     return close(sys.argv[1])
+
+
+def dget():
+    return dget_url(sys.argv[1])

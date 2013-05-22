@@ -32,3 +32,8 @@ def next_job(job):
 def close_job(job):
     proxy = get_proxy()
     return proxy.close_job(job)
+
+
+def dget_url(package):
+    proxy = get_proxy()
+    return proxy.get_dsc_url(package)

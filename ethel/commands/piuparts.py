@@ -111,5 +111,6 @@ def parse_log(lines, path):
 
 
 def main():
-    report = piuparts(*sys.argv[1:])
-    print(report)
+    output = open(sys.argv[3], 'wb')
+    report = piuparts(*sys.argv[1:2])
+    output.write(report.to_xml_bytes())
