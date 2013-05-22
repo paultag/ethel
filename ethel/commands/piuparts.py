@@ -91,7 +91,6 @@ def parse_log(lines, path):
 
         info = match.groupdict()
         if info['severity'] in ['DEBUG', 'DUMP', 'INFO']:
-            cur_msg = ""
             continue
 
         if obj:
