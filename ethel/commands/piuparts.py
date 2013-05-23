@@ -51,7 +51,8 @@ def piuparts(chroot, package):
 
         for x in parse_log(out.splitlines(), package):
             analysis.results.append(x)
-    return analysis
+
+        return failed, out, analysis
 
 
 def parse_log(lines, path):
