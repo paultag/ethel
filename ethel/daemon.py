@@ -31,6 +31,7 @@ def process():
     if obj is None:
         print("Nothing to do. Hanging.")
         time.sleep(5)
+        return
 
     build_type = obj['type']
     pid = obj['package']
