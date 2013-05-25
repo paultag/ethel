@@ -1,6 +1,9 @@
 from firehose.model import Issue, Message, File, Location, Point
 import lxml.etree
 
+# We require:
+# cppcheck --enable=all . --xml 1>/dev/null  ( stderr )
+
 
 def parse_cppcheck_xml(payload):
     tree = lxml.etree.fromstring(payload)
