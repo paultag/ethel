@@ -17,10 +17,10 @@ def get_proxy():
     return proxy
 
 
-def submit_report(report, job):
+def submit_report(report, job, log):
     proxy = get_proxy()
     report = Analysis.from_xml(report)
-    obj = proxy.submit_report(job, digest_firehose_tree(report))
+    obj = proxy.submit_report(job, digest_firehose_tree(report), log)
     return obj
 
 

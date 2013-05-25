@@ -48,17 +48,19 @@ def adequate(chroot, package):
 
         out, err = scmd(session, [
             'dpkg', '-i', where
-        ], user='root', expected=1)
+        ], user='root', expected=(0, 1))
 
         out, err = scmd(session, [
             'apt-get', 'install', '-y', '-f'
         ], user='root')
 
-        #out, err = scmd(session, ['adequate', deb.split("_", 1)[0]])
-        out, err = scmd(session, ['adequate', '--all'])
+        out, err = scmd(session, ['adequate', deb.split("_", 1)[0]])
+        failed = False
         for issue in parse_output(out.splitlines()):
+            failed = True
             analysis.results.append(issue)
-        return analysis
+
+        return failed, out, analysis
 
 
 def main():

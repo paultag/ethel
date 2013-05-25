@@ -36,10 +36,13 @@ def run_command(command, stdin=None):
 
 
 def safe_run(cmd, expected=0):
+    if not isinstance(expected, tuple):
+        expected = (expected, )
+
     out, err, ret = run_command(cmd)
     out, err = (x.decode('utf-8') for x in (out, err))
 
-    if ret != expected:
+    if not ret in expected:
         e = EthelSubprocessError(out, err, ret, cmd)
         raise e
 
