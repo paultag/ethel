@@ -7,7 +7,7 @@ from storz.wrapper import generate_analysis
 import os
 
 
-def adequate(chroot, package):
+def adequate(chroot, package):  # make it package*s*
     analysis = generate_analysis("adequate", "unstable", package)
 
     with schroot(chroot) as session:

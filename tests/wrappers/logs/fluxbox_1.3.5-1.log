@@ -1,0 +1,744 @@
+Executing: sudo env PYTHONPATH=/srv/piuparts.debian.org/lib/python2.6/dist-packages:/srv/piuparts.debian.org/lib/python2.7/dist-packages timeout -s INT -k 5m 35m /srv/piuparts.debian.org/sbin/piuparts --skip-logrotatefiles-test --warn-on-others --scriptsdir /etc/piuparts/scripts --warn-on-debsums-errors --scriptsdir /etc/piuparts/scripts-leftovers --mirror http://mirror.bm.debian.org/debian/ --tmpdir /srv/piuparts.debian.org/tmp -b /srv/piuparts.debian.org/slave/basetgz/sid_amd64.tar.gz -d sid --no-upgrade-test --apt fluxbox=1.3.5-1
+Guessed: debian
+0m0.0s INFO: ------------------------------------------------------------------------------
+0m0.0s INFO: To quickly glance what went wrong, scroll down to the bottom of this logfile.
+0m0.0s INFO: FAQ available at http://wiki.debian.org/piuparts/FAQ
+0m0.0s INFO: ------------------------------------------------------------------------------
+0m0.0s INFO: piuparts version 0.51~201305142055~0.50-217-g30abd96 starting up.
+0m0.0s INFO: Command line arguments: '/srv/piuparts.debian.org/sbin/piuparts' '--skip-logrotatefiles-test' '--warn-on-others' '--scriptsdir' '/etc/piuparts/scripts' '--warn-on-debsums-errors' '--scriptsdir' '/etc/piuparts/scripts-leftovers' '--mirror' 'http://mirror.bm.debian.org/debian/' '--tmpdir' '/srv/piuparts.debian.org/tmp' '-b' '/srv/piuparts.debian.org/slave/basetgz/sid_amd64.tar.gz' '-d' 'sid' '--no-upgrade-test' '--apt' 'fluxbox=1.3.5-1'
+0m0.0s INFO: Running on: Linux piu-slave-bm-a 3.2.0-4-amd64 #1 SMP Debian 3.2.41-2 x86_64
+0m0.0s DEBUG: Created temporary directory /srv/piuparts.debian.org/tmp/tmp_bkAQx
+0m0.0s DEBUG: Unpacking /srv/piuparts.debian.org/slave/basetgz/sid_amd64.tar.gz into /srv/piuparts.debian.org/tmp/tmp_bkAQx
+0m0.0s DEBUG: Starting command: ['tar', '-C', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', '-zxf', '/srv/piuparts.debian.org/slave/basetgz/sid_amd64.tar.gz']
+0m1.7s DEBUG: Command ok: ['tar', '-C', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', '-zxf', '/srv/piuparts.debian.org/slave/basetgz/sid_amd64.tar.gz']
+0m1.7s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'mount', '-t', 'proc', 'proc', '/proc']
+0m1.8s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'mount', '-t', 'proc', 'proc', '/proc']
+0m1.8s DEBUG: sources.list:
+  deb http://mirror.bm.debian.org/debian/ sid main
+  deb http://mirror.bm.debian.org/debian/ sid contrib
+  deb http://mirror.bm.debian.org/debian/ sid non-free
+0m1.8s DEBUG: Created policy-rc.d and chmodded it.
+0m1.8s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'apt-get', 'update']
+0m7.9s DUMP: 
+  Get:1 http://mirror.bm.debian.org sid InRelease [205 kB]
+  Get:2 http://mirror.bm.debian.org sid/main amd64 Packages/DiffIndex [7876 B]
+  Hit http://mirror.bm.debian.org sid/contrib amd64 Packages/DiffIndex
+  Hit http://mirror.bm.debian.org sid/non-free amd64 Packages/DiffIndex
+  Get:3 http://mirror.bm.debian.org sid/contrib Translation-en/DiffIndex [7819 B]
+  Get:4 http://mirror.bm.debian.org sid/main Translation-en/DiffIndex [7876 B]
+  Get:5 http://mirror.bm.debian.org sid/non-free Translation-en/DiffIndex [7819 B]
+  Get:6 http://mirror.bm.debian.org sid/main amd64 2013-05-14-2017.57.pdiff [12.2 kB]
+  Get:7 http://mirror.bm.debian.org sid/main amd64 2013-05-14-2017.57.pdiff [12.2 kB]
+  Get:8 http://mirror.bm.debian.org sid/main 2013-05-14-2017.57.pdiff [2787 B]
+  Get:9 http://mirror.bm.debian.org sid/main 2013-05-14-2017.57.pdiff [2787 B]
+  Get:10 http://mirror.bm.debian.org sid/main amd64 2013-05-15-0215.38.pdiff [15.7 kB]
+  Get:11 http://mirror.bm.debian.org sid/main amd64 2013-05-15-0215.38.pdiff [15.7 kB]
+  Get:12 http://mirror.bm.debian.org sid/main 2013-05-15-0215.38.pdiff [286 B]
+  Get:13 http://mirror.bm.debian.org sid/main 2013-05-15-0215.38.pdiff [286 B]
+  Fetched 267 kB in 4s (63.8 kB/s)
+  Reading package lists...
+0m7.9s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'apt-get', 'update']
+0m7.9s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'apt-get', '-yf', 'dist-upgrade']
+0m8.4s DUMP: 
+  Reading package lists...
+  Building dependency tree...
+  0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+0m8.4s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'apt-get', '-yf', 'dist-upgrade']
+0m8.4s DEBUG: Copying scriptsdir /etc/piuparts/scripts to /srv/piuparts.debian.org/tmp/tmp_bkAQx/tmp/scripts/
+0m8.4s DEBUG: Copying scriptsdir /etc/piuparts/scripts-leftovers to /srv/piuparts.debian.org/tmp/tmp_bkAQx/tmp/scripts/
+0m8.4s INFO: Running scripts post_setup
+0m8.4s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'tmp/scripts/post_setup_experimental']
+0m8.4s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'tmp/scripts/post_setup_experimental']
+0m8.4s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'tmp/scripts/post_setup_fake-essential']
+0m9.9s DUMP: 
+  *** Adding fake essential packages ***
+  Reading package lists...
+  Building dependency tree...
+  The following extra packages will be installed:
+    ucf
+  Suggested packages:
+    virtual-mysql-client mysql-client postgresql-client
+  The following NEW packages will be installed:
+    dbconfig-common ucf
+  0 upgraded, 2 newly installed, 0 to remove and 0 not upgraded.
+  Need to get 558 kB of archives.
+  After this operation, 1444 kB of additional disk space will be used.
+  Get:1 http://mirror.bm.debian.org/debian/ sid/main ucf all 3.0025+nmu3 [70.8 kB]
+  Get:2 http://mirror.bm.debian.org/debian/ sid/main dbconfig-common all 1.8.47+nmu1 [487 kB]
+  debconf: delaying package configuration, since apt-utils is not installed
+  Fetched 558 kB in 0s (24.9 MB/s)
+  Selecting previously unselected package ucf.
+  (Reading database ... 6681 files and directories currently installed.)
+  Unpacking ucf (from .../ucf_3.0025+nmu3_all.deb) ...
+  Moving old data out of the way
+  Selecting previously unselected package dbconfig-common.
+  Unpacking dbconfig-common (from .../dbconfig-common_1.8.47+nmu1_all.deb) ...
+  Setting up ucf (3.0025+nmu3) ...
+  Setting up dbconfig-common (1.8.47+nmu1) ...
+  
+  Creating config file /etc/dbconfig-common/config with new version
+0m9.9s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'tmp/scripts/post_setup_fake-essential']
+0m9.9s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'tmp/scripts/post_setup_forbid_home']
+0m10.0s DUMP: 
+  Disabling /home
+0m10.0s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'tmp/scripts/post_setup_forbid_home']
+0m10.0s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'tmp/scripts/post_setup_squeeze-backports']
+0m10.0s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'tmp/scripts/post_setup_squeeze-backports']
+0m10.0s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'apt-get', 'clean']
+0m10.0s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'apt-get', 'clean']
+0m10.5s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'dpkg', '--get-selections', '*']
+0m10.6s DUMP: 
+  apt						install
+  base-files					install
+  base-passwd					install
+  bash						install
+  bsdutils					install
+  coreutils					install
+  dash						install
+  dbconfig-common					install
+  debconf						install
+  debconf-i18n					install
+  debian-archive-keyring				install
+  debianutils					install
+  diffutils					install
+  dpkg						install
+  e2fslibs:amd64					install
+  e2fsprogs					install
+  eatmydata					install
+  findutils					install
+  gcc-4.7-base:amd64				install
+  gcc-4.8-base:amd64				install
+  gnupg						install
+  gpgv						install
+  grep						install
+  gzip						install
+  hostname					install
+  initscripts					install
+  insserv						install
+  libacl1:amd64					install
+  libapt-pkg4.12:amd64				install
+  libattr1:amd64					install
+  libblkid1:amd64					install
+  libbz2-1.0:amd64				install
+  libc-bin					install
+  libc6:amd64					install
+  libcap2:amd64					install
+  libcomerr2:amd64				install
+  libdb5.1:amd64					install
+  libgcc1:amd64					install
+  liblocale-gettext-perl				install
+  liblzma5:amd64					install
+  libmount1					install
+  libncurses5:amd64				install
+  libpam-modules:amd64				install
+  libpam-modules-bin				install
+  libpam-runtime					install
+  libpam0g:amd64					install
+  libpcre3:amd64					install
+  libreadline6:amd64				install
+  libselinux1:amd64				install
+  libsemanage-common				install
+  libsemanage1:amd64				install
+  libsepol1:amd64					install
+  libslang2:amd64					install
+  libss2:amd64					install
+  libstdc++6:amd64				install
+  libtext-charwidth-perl				install
+  libtext-iconv-perl				install
+  libtext-wrapi18n-perl				install
+  libtinfo5:amd64					install
+  libusb-0.1-4:amd64				install
+  libustr-1.0-1:amd64				install
+  libuuid1:amd64					install
+  login						install
+  lsb-base					install
+  mawk						install
+  mount						install
+  multiarch-support				install
+  ncurses-base					install
+  ncurses-bin					install
+  passwd						install
+  perl-base					install
+  readline-common					install
+  sed						install
+  sensible-utils					install
+  sysv-rc						install
+  sysvinit					install
+  sysvinit-utils					install
+  tar						install
+  tzdata						install
+  ucf						install
+  util-linux					install
+  xz-utils					install
+  zlib1g:amd64					install
+0m10.6s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'dpkg', '--get-selections', '*']
+0m10.6s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'dpkg-divert', '--list']
+0m10.6s DUMP: 
+  diversion of /usr/share/man/man1/sh.1.gz to /usr/share/man/man1/sh.distrib.1.gz by dash
+  diversion of /bin/sh to /bin/sh.distrib by dash
+0m10.6s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'dpkg-divert', '--list']
+0m10.6s INFO: apt-cache does not know about any of the requested packages
+0m10.6s INFO: Running scripts pre_test
+0m10.6s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'tmp/scripts/pre_test_root_password']
+0m10.6s DUMP: 
+  Enter new UNIX password: Retype new UNIX password: passwd: password updated successfully
+0m10.6s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'tmp/scripts/pre_test_root_password']
+0m10.6s INFO: Running scripts pre_install
+0m10.6s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'tmp/scripts/pre_install_exceptions']
+0m10.7s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'tmp/scripts/pre_install_exceptions']
+0m10.7s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'tmp/scripts/pre_install_foreign_architecture_i386']
+0m10.7s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'tmp/scripts/pre_install_foreign_architecture_i386']
+0m10.7s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'apt-cache', 'show', 'fluxbox']
+0m12.4s DUMP: 
+  Package: fluxbox
+  Version: 1.3.5-1
+  Installed-Size: 3823
+  Maintainer: Dmitry E. Oboukhov <unera@debian.org>
+  Architecture: amd64
+  Provides: x-window-manager
+  Depends: menu (>= 2.1.19), libc6 (>= 2.15), libfontconfig1 (>= 2.9.0), libfreetype6 (>= 2.2.1), libfribidi0 (>= 0.19.2), libgcc1 (>= 1:4.1.1), libice6 (>= 1:1.0.0), libimlib2, libsm6, libstdc++6 (>= 4.6), libx11-6, libxext6, libxft2 (>> 2.1.1), libxinerama1, libxpm4, libxrandr2, libxrender1, zlib1g (>= 1:1.1.4)
+  Recommends: xfonts-terminus, feh | eterm | hsetroot | xloadimage
+  Suggests: fbpager, fbdesk, fbautostart
+  Description-en: Highly configurable and low resource X11 Window manager
+   Fairly similar to blackbox, from which it is derived, but has been
+   extended with features such as pwm-style window tabs, configurable
+   key bindings, toolbar, and an iconbar. It also includes some cosmetic
+   fixes over blackbox.
+   .
+   This package contains support for GNOME and KDE.
+  Homepage: http://fluxbox.org
+  Description-md5: 13990cdf4dc1b2dc117250b7023f2e58
+  Tag: implemented-in::c, interface::x11, role::program, scope::utility,
+   uitoolkit::gtk, x11::window-manager
+  Section: x11
+  Priority: optional
+  Filename: pool/main/f/fluxbox/fluxbox_1.3.5-1_amd64.deb
+  Size: 1520130
+  MD5sum: 03b752016c9b422c0e9dc8d0128ee497
+  SHA1: 0da1cfa9f8ec53b27bc3c22e04f89e115b1b03bf
+  SHA256: 017d26959e140eb6f3c0ffd36a4ce9d69cc69fafdf4b16e79dc92530d41dd3a3
+0m12.5s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'apt-cache', 'show', 'fluxbox']
+0m12.5s DEBUG: Starting command: ['dpkg-deb', '-b', '--nocheck', '/srv/piuparts.debian.org/tmp/tmptZq1w2/piuparts-depends-dummy']
+0m12.5s DUMP: 
+  dpkg-deb: warning: not checking contents of control area
+  dpkg-deb: building an unknown package in '/srv/piuparts.debian.org/tmp/tmptZq1w2/piuparts-depends-dummy.deb'.
+0m12.5s DEBUG: Command ok: ['dpkg-deb', '-b', '--nocheck', '/srv/piuparts.debian.org/tmp/tmptZq1w2/piuparts-depends-dummy']
+0m12.5s DEBUG: Copying /srv/piuparts.debian.org/tmp/tmptZq1w2/piuparts-depends-dummy.deb to /srv/piuparts.debian.org/tmp/tmp_bkAQx/tmp
+0m12.5s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'dpkg', '-i', 'tmp/piuparts-depends-dummy.deb']
+0m12.5s DUMP: 
+  Selecting previously unselected package piuparts-depends-dummy.
+  (Reading database ... 6935 files and directories currently installed.)
+  Unpacking piuparts-depends-dummy (from tmp/piuparts-depends-dummy.deb) ...
+  dpkg: dependency problems prevent configuration of piuparts-depends-dummy:
+   piuparts-depends-dummy depends on menu (>= 2.1.19); however:
+    Package menu is not installed.
+   piuparts-depends-dummy depends on libfontconfig1 (>= 2.9.0); however:
+    Package libfontconfig1 is not installed.
+   piuparts-depends-dummy depends on libfreetype6 (>= 2.2.1); however:
+    Package libfreetype6 is not installed.
+   piuparts-depends-dummy depends on libfribidi0 (>= 0.19.2); however:
+    Package libfribidi0 is not installed.
+   piuparts-depends-dummy depends on libice6 (>= 1:1.0.0); however:
+    Package libice6 is not installed.
+   piuparts-depends-dummy depends on libimlib2; however:
+    Package libimlib2 is not installed.
+   piuparts-depends-dummy depends on libsm6; however:
+    Package libsm6 is not installed.
+   piuparts-depends-dummy depends on libx11-6; however:
+    Package libx11-6 is not installed.
+   piuparts-depends-dummy depends on libxext6; however:
+    Package libxext6 is not installed.
+   piuparts-depends-dummy depends on libxft2 (>> 2.1.1); however
+  dpkg: error processing piuparts-depends-dummy (--install):
+   dependency problems - leaving unconfigured
+  Errors were encountered while processing:
+   piuparts-depends-dummy
+0m12.5s DEBUG: Command failed (status=1), but ignoring error: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'dpkg', '-i', 'tmp/piuparts-depends-dummy.deb']
+0m12.5s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'apt-get', '-yf', 'install']
+0m16.7s DUMP: 
+  Reading package lists...
+  Building dependency tree...
+  Reading state information...
+  Correcting dependencies... Done
+  The following extra packages will be installed:
+    fontconfig-config fonts-dejavu-core libexpat1 libfontconfig1 libfreetype6
+    libfribidi0 libgif4 libice6 libid3tag0 libimlib2 libjbig0 libjpeg8
+    libpng12-0 libsm6 libtiff4 libx11-6 libx11-data libxau6 libxcb1 libxdmcp6
+    libxext6 libxft2 libxinerama1 libxpm4 libxrandr2 libxrender1 menu
+    ttf-dejavu-core x11-common
+  Suggested packages:
+    menu-l10n gksu kdebase-bin kdebase-runtime ktsuss sux
+  The following NEW packages will be installed:
+    fontconfig-config fonts-dejavu-core libexpat1 libfontconfig1 libfreetype6
+    libfribidi0 libgif4 libice6 libid3tag0 libimlib2 libjbig0 libjpeg8
+    libpng12-0 libsm6 libtiff4 libx11-6 libx11-data libxau6 libxcb1 libxdmcp6
+    libxext6 libxft2 libxinerama1 libxpm4 libxrandr2 libxrender1 menu
+    ttf-dejavu-core x11-common
+  0 upgraded, 29 newly installed, 0 to remove and 0 not upgraded.
+  1 not fully installed or removed.
+  Need to get 5435 kB of archives.
+  After this operation, 13.8 MB of additional disk space will be used.
+  Get:1 http://mirror.bm.debian.org/debian/ sid/main menu amd64 2.1.46 [480 kB]
+  Get:2 http://mirror.bm.debian.org/debian/ sid/main libexpat1 amd64 2.1.0-3 [139 kB]
+  Get:3 http://mirror.bm.debian.org/debian/ sid/main libfreetype6 amd64 2.4.9-1.1 [451 kB]
+  Get:4 http://mirror.bm.debian.org/debian/ sid/main fonts-dejavu-core all 2.33+svn2514-3 [1042 kB]
+  Get:5 http://mirror.bm.debian.org/debian/ sid/main ttf-dejavu-core all 2.33+svn2514-3 [29.8 kB]
+  Get:6 http://mirror.bm.debian.org/debian/ sid/main fontconfig-config all 2.9.0-7.1 [233 kB]
+  Get:7 http://mirror.bm.debian.org/debian/ sid/main libfontconfig1 amd64 2.9.0-7.1 [300 kB]
+  Get:8 http://mirror.bm.debian.org/debian/ sid/main libfribidi0 amd64 0.19.5-2 [46.6 kB]
+  Get:9 http://mirror.bm.debian.org/debian/ sid/main x11-common all 1:7.7+3 [284 kB]
+  Get:10 http://mirror.bm.debian.org/debian/ sid/main libice6 amd64 2:1.0.8-2 [63.1 kB]
+  Get:11 http://mirror.bm.debian.org/debian/ sid/main libgif4 amd64 4.1.6-10 [42.7 kB]
+  Get:12 http://mirror.bm.debian.org/debian/ sid/main libid3tag0 amd64 0.15.1b-10 [40.4 kB]
+  Get:13 http://mirror.bm.debian.org/debian/ sid/main libjpeg8 amd64 8d-1 [134 kB]
+  Get:14 http://mirror.bm.debian.org/debian/ sid/main libpng12-0 amd64 1.2.49-4 [190 kB]
+  Get:15 http://mirror.bm.debian.org/debian/ sid/main libjbig0 amd64 2.0-2 [32.2 kB]
+  Get:16 http://mirror.bm.debian.org/debian/ sid/main libtiff4 amd64 3.9.6-11 [202 kB]
+  Get:17 http://mirror.bm.debian.org/debian/ sid/main libxau6 amd64 1:1.0.7-1 [18.8 kB]
+  Get:18 http://mirror.bm.debian.org/debian/ sid/main libxdmcp6 amd64 1:1.1.1-1 [26.3 kB]
+  Get:19 http://mirror.bm.debian.org/debian/ sid/main libxcb1 amd64 1.8.1-2 [50.1 kB]
+  Get:20 http://mirror.bm.debian.org/debian/ sid/main libx11-data all 2:1.5.0-1 [189 kB]
+  Get:21 http://mirror.bm.debian.org/debian/ sid/main libx11-6 amd64 2:1.5.0-1 [901 kB]
+  Get:22 http://mirror.bm.debian.org/debian/ sid/main libxext6 amd64 2:1.3.1-2 [55.3 kB]
+  Get:23 http://mirror.bm.debian.org/debian/ sid/main libimlib2 amd64 1.4.5-1 [258 kB]
+  Get:24 http://mirror.bm.debian.org/debian/ sid/main libsm6 amd64 2:1.2.1-2 [34.2 kB]
+  Get:25 http://mirror.bm.debian.org/debian/ sid/main libxrender1 amd64 1:0.9.7-1 [32.2 kB]
+  Get:26 http://mirror.bm.debian.org/debian/ sid/main libxft2 amd64 2.3.1-1 [61.0 kB]
+  Get:27 http://mirror.bm.debian.org/debian/ sid/main libxinerama1 amd64 2:1.1.2-1 [16.8 kB]
+  Get:28 http://mirror.bm.debian.org/debian/ sid/main libxpm4 amd64 1:3.5.10-1 [49.4 kB]
+  Get:29 http://mirror.bm.debian.org/debian/ sid/main libxrandr2 amd64 2:1.3.2-2 [33.5 kB]
+  debconf: delaying package configuration, since apt-utils is not installed
+  Fetched 5435 kB in 1s (3958 kB/s)
+  Selecting previously unselected package menu.
+  (Reading database ... 6935 files and directories currently installed.)
+  Unpacking menu (from .../archives/menu_2.1.46_amd64.deb) ...
+  Selecting previously unselected package libexpat1:amd64.
+  Unpacking libexpat1:amd64 (from .../libexpat1_2.1.0-3_amd64.deb) ...
+  Selecting previously unselected package libfreetype6:amd64.
+  Unpacking libfreetype6:amd64 (from .../libfreetype6_2.4.9-1.1_amd64.deb) ...
+  Selecting previously unselected package fonts-dejavu-core.
+  Unpacking fonts-dejavu-core (from .../fonts-dejavu-core_2.33+svn2514-3_all.deb) ...
+  Selecting previously unselected package ttf-dejavu-core.
+  Unpacking ttf-dejavu-core (from .../ttf-dejavu-core_2.33+svn2514-3_all.deb) ...
+  Selecting previously unselected package fontconfig-config.
+  Unpacking fontconfig-config (from .../fontconfig-config_2.9.0-7.1_all.deb) ...
+  Selecting previously unselected package libfontconfig1:amd64.
+  Unpacking libfontconfig1:amd64 (from .../libfontconfig1_2.9.0-7.1_amd64.deb) ...
+  Selecting previously unselected package libfribidi0:amd64.
+  Unpacking libfribidi0:amd64 (from .../libfribidi0_0.19.5-2_amd64.deb) ...
+  Selecting previously unselected package x11-common.
+  Unpacking x11-common (from .../x11-common_1%3a7.7+3_all.deb) ...
+  Selecting previously unselected package libice6:amd64.
+  Unpacking libice6:amd64 (from .../libice6_2%3a1.0.8-2_amd64.deb) ...
+  Selecting previously unselected package libgif4.
+  Unpacking libgif4 (from .../libgif4_4.1.6-10_amd64.deb) ...
+  Selecting previously unselected package libid3tag0.
+  Unpacking libid3tag0 (from .../libid3tag0_0.15.1b-10_amd64.deb) ...
+  Selecting previously unselected package libjpeg8:amd64.
+  Unpacking libjpeg8:amd64 (from .../libjpeg8_8d-1_amd64.deb) ...
+  Selecting previously unselected package libpng12-0:amd64.
+  Unpacking libpng12-0:amd64 (from .../libpng12-0_1.2.49-4_amd64.deb) ...
+  Selecting previously unselected package libjbig0:amd64.
+  Unpacking libjbig0:amd64 (from .../libjbig0_2.0-2_amd64.deb) ...
+  Selecting previously unselected package libtiff4:amd64.
+  Unpacking libtiff4:amd64 (from .../libtiff4_3.9.6-11_amd64.deb) ...
+  Selecting previously unselected package libxau6:amd64.
+  Unpacking libxau6:amd64 (from .../libxau6_1%3a1.0.7-1_amd64.deb) ...
+  Selecting previously unselected package libxdmcp6:amd64.
+  Unpacking libxdmcp6:amd64 (from .../libxdmcp6_1%3a1.1.1-1_amd64.deb) ...
+  Selecting previously unselected package libxcb1:amd64.
+  Unpacking libxcb1:amd64 (from .../libxcb1_1.8.1-2_amd64.deb) ...
+  Selecting previously unselected package libx11-data.
+  Unpacking libx11-data (from .../libx11-data_2%3a1.5.0-1_all.deb) ...
+  Selecting previously unselected package libx11-6:amd64.
+  Unpacking libx11-6:amd64 (from .../libx11-6_2%3a1.5.0-1_amd64.deb) ...
+  Selecting previously unselected package libxext6:amd64.
+  Unpacking libxext6:amd64 (from .../libxext6_2%3a1.3.1-2_amd64.deb) ...
+  Selecting previously unselected package libimlib2.
+  Unpacking libimlib2 (from .../libimlib2_1.4.5-1_amd64.deb) ...
+  Selecting previously unselected package libsm6:amd64.
+  Unpacking libsm6:amd64 (from .../libsm6_2%3a1.2.1-2_amd64.deb) ...
+  Selecting previously unselected package libxrender1:amd64.
+  Unpacking libxrender1:amd64 (from .../libxrender1_1%3a0.9.7-1_amd64.deb) ...
+  Selecting previously unselected package libxft2:amd64.
+  Unpacking libxft2:amd64 (from .../libxft2_2.3.1-1_amd64.deb) ...
+  Selecting previously unselected package libxinerama1:amd64.
+  Unpacking libxinerama1:amd64 (from .../libxinerama1_2%3a1.1.2-1_amd64.deb) ...
+  Selecting previously unselected package libxpm4:amd64.
+  Unpacking libxpm4:amd64 (from .../libxpm4_1%3a3.5.10-1_amd64.deb) ...
+  Selecting previously unselected package libxrandr2:amd64.
+  Unpacking libxrandr2:amd64 (from .../libxrandr2_2%3a1.3.2-2_amd64.deb) ...
+  Setting up menu (2.1.46) ...
+  Setting up libexpat1:amd64 (2.1.0-3) ...
+  Setting up libfreetype6:amd64 (2.4.9-1.1) ...
+  Setting up fonts-dejavu-core (2.33+svn2514-3) ...
+  Setting up ttf-dejavu-core (2.33+svn2514-3) ...
+  Setting up fontconfig-config (2.9.0-7.1) ...
+  Setting up libfontconfig1:amd64 (2.9.0-7.1) ...
+  Setting up libfribidi0:amd64 (0.19.5-2) ...
+  Setting up x11-common (1:7.7+3) ...
+  invoke-rc.d: policy-rc.d denied execution of start.
+  Setting up libice6:amd64 (2:1.0.8-2) ...
+  Setting up libgif4 (4.1.6-10) ...
+  Setting up libid3tag0 (0.15.1b-10) ...
+  Setting up libjpeg8:amd64 (8d-1) ...
+  Setting up libpng12-0:amd64 (1.2.49-4) ...
+  Setting up libjbig0:amd64 (2.0-2) ...
+  Setting up libtiff4:amd64 (3.9.6-11) ...
+  Setting up libxau6:amd64 (1:1.0.7-1) ...
+  Setting up libxdmcp6:amd64 (1:1.1.1-1) ...
+  Setting up libxcb1:amd64 (1.8.1-2) ...
+  Setting up libx11-data (2:1.5.0-1) ...
+  Setting up libx11-6:amd64 (2:1.5.0-1) ...
+  Setting up libxext6:amd64 (2:1.3.1-2) ...
+  Setting up libimlib2 (1.4.5-1) ...
+  Setting up libsm6:amd64 (2:1.2.1-2) ...
+  Setting up libxrender1:amd64 (1:0.9.7-1) ...
+  Setting up libxft2:amd64 (2.3.1-1) ...
+  Setting up libxinerama1:amd64 (2:1.1.2-1) ...
+  Setting up libxpm4:amd64 (1:3.5.10-1) ...
+  Setting up libxrandr2:amd64 (2:1.3.2-2) ...
+  Processing triggers for menu ...
+  Setting up piuparts-depends-dummy (0.invalid.0) ...
+  Processing triggers for libc-bin ...
+  ldconfig deferred processing now taking place
+0m16.7s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'apt-get', '-yf', 'install']
+0m16.7s INFO: Installation of ['tmp/piuparts-depends-dummy.deb'] ok
+0m16.7s DEBUG: Removing /srv/piuparts.debian.org/tmp/tmp_bkAQx/tmp/piuparts-depends-dummy.deb
+0m16.7s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'dpkg', '--purge', 'piuparts-depends-dummy']
+0m16.7s DUMP: 
+  (Reading database ... 7721 files and directories currently installed.)
+  Removing piuparts-depends-dummy ...
+0m16.7s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'dpkg', '--purge', 'piuparts-depends-dummy']
+0m16.7s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'apt-get', 'clean']
+0m16.8s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'apt-get', 'clean']
+0m17.3s DEBUG: Starting command: ['lsof', '-w', '+D', '/srv/piuparts.debian.org/tmp/tmp_bkAQx']
+0m17.7s DEBUG: Command failed (status=1), but ignoring error: ['lsof', '-w', '+D', '/srv/piuparts.debian.org/tmp/tmp_bkAQx']
+0m18.7s DEBUG: No broken symlinks as far as we can find.
+0m18.7s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'apt-cache', 'policy']
+0m20.5s DUMP: 
+  Package files:
+   100 /var/lib/dpkg/status
+       release a=now
+   500 http://mirror.bm.debian.org/debian/ sid/non-free Translation-en
+   500 http://mirror.bm.debian.org/debian/ sid/main Translation-en
+   500 http://mirror.bm.debian.org/debian/ sid/contrib Translation-en
+   500 http://mirror.bm.debian.org/debian/ sid/non-free amd64 Packages
+       release o=Debian,a=unstable,n=sid,l=Debian,c=non-free
+       origin mirror.bm.debian.org
+   500 http://mirror.bm.debian.org/debian/ sid/contrib amd64 Packages
+       release o=Debian,a=unstable,n=sid,l=Debian,c=contrib
+       origin mirror.bm.debian.org
+   500 http://mirror.bm.debian.org/debian/ sid/main amd64 Packages
+       release o=Debian,a=unstable,n=sid,l=Debian,c=main
+       origin mirror.bm.debian.org
+  Pinned packages:
+0m20.5s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'apt-cache', 'policy']
+0m20.5s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'apt-cache', 'policy', 'fluxbox']
+0m20.6s DUMP: 
+  fluxbox:
+    Installed: (none)
+    Candidate: 1.3.5-1
+    Version table:
+       1.3.5-1 0
+          500 http://mirror.bm.debian.org/debian/ sid/main amd64 Packages
+0m20.6s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'apt-cache', 'policy', 'fluxbox']
+0m20.6s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'apt-get', '-y', 'install', 'fluxbox=1.3.5-1']
+0m21.8s DUMP: 
+  Reading package lists...
+  Building dependency tree...
+  Reading state information...
+  Suggested packages:
+    fbpager fbdesk fbautostart
+  Recommended packages:
+    xfonts-terminus feh eterm hsetroot xloadimage
+  The following NEW packages will be installed:
+    fluxbox
+  0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
+  Need to get 1520 kB of archives.
+  After this operation, 3915 kB of additional disk space will be used.
+  Get:1 http://mirror.bm.debian.org/debian/ sid/main fluxbox amd64 1.3.5-1 [1520 kB]
+  debconf: delaying package configuration, since apt-utils is not installed
+  Fetched 1520 kB in 0s (11.7 MB/s)
+  Selecting previously unselected package fluxbox.
+  (Reading database ... 7721 files and directories currently installed.)
+  Unpacking fluxbox (from .../fluxbox_1.3.5-1_amd64.deb) ...
+  Processing triggers for menu ...
+  Setting up fluxbox (1.3.5-1) ...
+  update-alternatives: using /usr/bin/startfluxbox to provide /usr/bin/x-window-manager (x-window-manager) in auto mode
+  Processing triggers for menu ...
+0m21.8s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'apt-get', '-y', 'install', 'fluxbox=1.3.5-1']
+0m21.8s INFO: Running scripts post_install
+0m21.8s DEBUG: Starting command: ['lsof', '-w', '+D', '/srv/piuparts.debian.org/tmp/tmp_bkAQx']
+0m22.1s DEBUG: Command failed (status=1), but ignoring error: ['lsof', '-w', '+D', '/srv/piuparts.debian.org/tmp/tmp_bkAQx']
+0m23.3s DEBUG: No broken symlinks as far as we can find.
+0m23.3s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'dpkg', '--get-selections', '*']
+0m23.3s DUMP: 
+  apt						install
+  base-files					install
+  base-passwd					install
+  bash						install
+  bsdutils					install
+  coreutils					install
+  dash						install
+  dbconfig-common					install
+  debconf						install
+  debconf-i18n					install
+  debian-archive-keyring				install
+  debianutils					install
+  diffutils					install
+  dpkg						install
+  e2fslibs:amd64					install
+  e2fsprogs					install
+  eatmydata					install
+  findutils					install
+  fluxbox						install
+  fontconfig-config				install
+  fonts-dejavu-core				install
+  gcc-4.7-base:amd64				install
+  gcc-4.8-base:amd64				install
+  gnupg						install
+  gpgv						install
+  grep						install
+  gzip						install
+  hostname					install
+  initscripts					install
+  insserv						install
+  libacl1:amd64					install
+  libapt-pkg4.12:amd64				install
+  libattr1:amd64					install
+  libblkid1:amd64					install
+  libbz2-1.0:amd64				install
+  libc-bin					install
+  libc6:amd64					install
+  libcap2:amd64					install
+  libcomerr2:amd64				install
+  libdb5.1:amd64					install
+  libexpat1:amd64					install
+  libfontconfig1:amd64				install
+  libfreetype6:amd64				install
+  libfribidi0:amd64				install
+  libgcc1:amd64					install
+  libgif4						install
+  libice6:amd64					install
+  libid3tag0					install
+  libimlib2					install
+  libjbig0:amd64					install
+  libjpeg8:amd64					install
+  liblocale-gettext-perl				install
+  liblzma5:amd64					install
+  libmount1					install
+  libncurses5:amd64				install
+  libpam-modules:amd64				install
+  libpam-modules-bin				install
+  libpam-runtime					install
+  libpam0g:amd64					install
+  libpcre3:amd64					install
+  libpng12-0:amd64				install
+  libreadline6:amd64				install
+  libselinux1:amd64				install
+  libsemanage-common				install
+  libsemanage1:amd64				install
+  libsepol1:amd64					install
+  libslang2:amd64					install
+  libsm6:amd64					install
+  libss2:amd64					install
+  libstdc++6:amd64				install
+  libtext-charwidth-perl				install
+  libtext-iconv-perl				install
+  libtext-wrapi18n-perl				install
+  libtiff4:amd64					install
+  libtinfo5:amd64					install
+  libusb-0.1-4:amd64				install
+  libustr-1.0-1:amd64				install
+  libuuid1:amd64					install
+  libx11-6:amd64					install
+  libx11-data					install
+  libxau6:amd64					install
+  libxcb1:amd64					install
+  libxdmcp6:amd64					install
+  libxext6:amd64					install
+  libxft2:amd64					install
+  libxinerama1:amd64				install
+  libxpm4:amd64					install
+  libxrandr2:amd64				install
+  libxrender1:amd64				install
+  login						install
+  lsb-base					install
+  mawk						install
+  menu						install
+  mount						install
+  multiarch-support				install
+  ncurses-base					install
+  ncurses-bin					install
+  passwd						install
+  perl-base					install
+  readline-common					install
+  sed						install
+  sensible-utils					install
+  sysv-rc						install
+  sysvinit					install
+  sysvinit-utils					install
+  tar						install
+  ttf-dejavu-core					install
+  tzdata						install
+  ucf						install
+  util-linux					install
+  x11-common					install
+  xz-utils					install
+  zlib1g:amd64					install
+0m23.3s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'dpkg', '--get-selections', '*']
+0m24.0s DEBUG: Starting command: ['debsums', '--root', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', '-ac']
+0m24.7s DEBUG: Command ok: ['debsums', '--root', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', '-ac']
+0m24.7s INFO: Running scripts pre_remove
+0m24.7s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'tmp/scripts/pre_remove_40_find_obsolete_conffiles']
+0m24.7s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'tmp/scripts/pre_remove_40_find_obsolete_conffiles']
+0m24.7s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'tmp/scripts/pre_remove_50_find_bad_permissions']
+0m24.7s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'tmp/scripts/pre_remove_50_find_bad_permissions']
+0m24.7s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'tmp/scripts/pre_remove_50_find_missing_copyright']
+0m24.7s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'tmp/scripts/pre_remove_50_find_missing_copyright']
+0m24.7s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'tmp/scripts/pre_remove_exceptions']
+0m24.9s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'tmp/scripts/pre_remove_exceptions']
+0m24.9s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'tmp/scripts/pre_remove_preseed_cleanup']
+0m24.9s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'tmp/scripts/pre_remove_preseed_cleanup']
+0m24.9s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'apt-get', 'remove', 'libx11-data', 'libfreetype6:amd64', 'libid3tag0', 'libx11-6:amd64', 'libxcb1:amd64', 'fonts-dejavu-core', 'libfontconfig1:amd64', 'libjpeg8:amd64', 'libfribidi0:amd64', 'libtiff4:amd64', 'menu', 'libsm6:amd64', 'libxext6:amd64', 'libimlib2', 'libxinerama1:amd64', 'libxdmcp6:amd64', 'libjbig0:amd64', 'libxau6:amd64', 'libpng12-0:amd64', 'libxrender1:amd64', 'libxpm4:amd64', 'x11-common', 'libxrandr2:amd64', 'ttf-dejavu-core', 'libice6:amd64', 'libxft2:amd64', 'libgif4', 'libexpat1:amd64', 'fontconfig-config', 'fluxbox']
+0m26.0s DUMP: 
+  Reading package lists...
+  Building dependency tree...
+  Reading state information...
+  The following packages will be REMOVED:
+    fluxbox fontconfig-config fonts-dejavu-core libexpat1 libfontconfig1
+    libfreetype6 libfribidi0 libgif4 libice6 libid3tag0 libimlib2 libjbig0
+    libjpeg8 libpng12-0 libsm6 libtiff4 libx11-6 libx11-data libxau6 libxcb1
+    libxdmcp6 libxext6 libxft2 libxinerama1 libxpm4 libxrandr2 libxrender1 menu
+    ttf-dejavu-core x11-common
+  0 upgraded, 0 newly installed, 30 to remove and 0 not upgraded.
+  After this operation, 17.8 MB disk space will be freed.
+  (Reading database ... 8120 files and directories currently installed.)
+  Removing fluxbox ...
+  Removing libxft2:amd64 ...
+  Removing libfontconfig1:amd64 ...
+  Removing fontconfig-config ...
+  Removing ttf-dejavu-core ...
+  Removing fonts-dejavu-core ...
+  Removing libexpat1:amd64 ...
+  Removing libimlib2 ...
+  Removing libfreetype6:amd64 ...
+  Removing libfribidi0:amd64 ...
+  Removing libgif4 ...
+  Removing libsm6:amd64 ...
+  Removing libice6:amd64 ...
+  Removing libid3tag0 ...
+  Removing libtiff4:amd64 ...
+  Removing libjbig0:amd64 ...
+  Removing libjpeg8:amd64 ...
+  Removing libpng12-0:amd64 ...
+  Removing libxrandr2:amd64 ...
+  Removing libxrender1:amd64 ...
+  Removing libxpm4:amd64 ...
+  Removing libxinerama1:amd64 ...
+  Removing libxext6:amd64 ...
+  Removing libx11-6:amd64 ...
+  Removing libx11-data ...
+  Removing libxcb1:amd64 ...
+  Removing libxau6:amd64 ...
+  Removing libxdmcp6:amd64 ...
+  Removing menu ...
+  Removing x11-common ...
+  invoke-rc.d: policy-rc.d denied execution of stop.
+  Processing triggers for libc-bin ...
+  ldconfig deferred processing now taking place
+0m26.0s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'apt-get', 'remove', 'libx11-data', 'libfreetype6:amd64', 'libid3tag0', 'libx11-6:amd64', 'libxcb1:amd64', 'fonts-dejavu-core', 'libfontconfig1:amd64', 'libjpeg8:amd64', 'libfribidi0:amd64', 'libtiff4:amd64', 'menu', 'libsm6:amd64', 'libxext6:amd64', 'libimlib2', 'libxinerama1:amd64', 'libxdmcp6:amd64', 'libjbig0:amd64', 'libxau6:amd64', 'libpng12-0:amd64', 'libxrender1:amd64', 'libxpm4:amd64', 'x11-common', 'libxrandr2:amd64', 'ttf-dejavu-core', 'libice6:amd64', 'libxft2:amd64', 'libgif4', 'libexpat1:amd64', 'fontconfig-config', 'fluxbox']
+0m26.0s INFO: Running scripts post_remove
+0m26.0s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'tmp/scripts/post_remove_cleanup']
+0m26.1s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'tmp/scripts/post_remove_cleanup']
+0m26.1s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'dpkg', '--purge', 'libx11-data', 'libfreetype6:amd64', 'libid3tag0', 'libx11-6:amd64', 'libxcb1:amd64', 'fonts-dejavu-core', 'libfontconfig1:amd64', 'libjpeg8:amd64', 'libfribidi0:amd64', 'libtiff4:amd64', 'menu', 'libsm6:amd64', 'libxext6:amd64', 'libimlib2', 'libxinerama1:amd64', 'libxdmcp6:amd64', 'libjbig0:amd64', 'libxau6:amd64', 'libpng12-0:amd64', 'libxrender1:amd64', 'libxpm4:amd64', 'x11-common', 'libxrandr2:amd64', 'ttf-dejavu-core', 'libice6:amd64', 'libxft2:amd64', 'libgif4', 'libexpat1:amd64', 'fontconfig-config']
+0m26.7s DUMP: 
+  dpkg: warning: ignoring request to remove libx11-data which isn't installed
+  (Reading database ... 7015 files and directories currently installed.)
+  Removing libfreetype6:amd64 ...
+  Purging configuration files for libfreetype6:amd64 ...
+  Removing libid3tag0 ...
+  Purging configuration files for libid3tag0 ...
+  Removing libx11-6:amd64 ...
+  Purging configuration files for libx11-6:amd64 ...
+  Removing libxcb1:amd64 ...
+  Purging configuration files for libxcb1:amd64 ...
+  Removing fonts-dejavu-core ...
+  Purging configuration files for fonts-dejavu-core ...
+  Removing libfontconfig1:amd64 ...
+  Purging configuration files for libfontconfig1:amd64 ...
+  dpkg: warning: ignoring request to remove libjpeg8 which isn't installed
+  Removing libfribidi0:amd64 ...
+  Purging configuration files for libfribidi0:amd64 ...
+  Removing libtiff4:amd64 ...
+  Purging configuration files for libtiff4:amd64 ...
+  Removing menu ...
+  Purging configuration files for menu ...
+  Removing libsm6:amd64 ...
+  Purging configuration files for libsm6:amd64 ...
+  Removing libxext6:amd64 ...
+  Purging configuration files for libxext6:amd64 ...
+  Removing libimlib2 ...
+  Purging configuration files for libimlib2 ...
+  Removing libxinerama1:amd64 ...
+  Purging configuration files for libxinerama1:amd64 ...
+  Removing libxdmcp6:amd64 ...
+  Purging configuration files for libxdmcp6:amd64 ...
+  Removing libjbig0:amd64 ...
+  Purging configuration files for libjbig0:amd64 ...
+  Removing libxau6:amd64 ...
+  Purging configuration files for libxau6:amd64 ...
+  Removing libpng12-0:amd64 ...
+  Purging configuration files for libpng12-0:amd64 ...
+  Removing libxrender1:amd64 ...
+  Purging configuration files for libxrender1:amd64 ...
+  Removing libxpm4:amd64 ...
+  Purging configuration files for libxpm4:amd64 ...
+  Removing x11-common ...
+  Purging configuration files for x11-common ...
+  Removing libxrandr2:amd64 ...
+  Purging configuration files for libxrandr2:amd64 ...
+  dpkg: warning: ignoring request to remove ttf-dejavu-core which isn't installed
+  Removing libice6:amd64 ...
+  Purging configuration files for libice6:amd64 ...
+  Removing libxft2:amd64 ...
+  Purging configuration files for libxft2:amd64 ...
+  Removing libgif4 ...
+  Purging configuration files for libgif4 ...
+  Removing libexpat1:amd64 ...
+  Purging configuration files for libexpat1:amd64 ...
+  Removing fontconfig-config ...
+  Purging configuration files for fontconfig-config ...
+0m26.7s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'dpkg', '--purge', 'libx11-data', 'libfreetype6:amd64', 'libid3tag0', 'libx11-6:amd64', 'libxcb1:amd64', 'fonts-dejavu-core', 'libfontconfig1:amd64', 'libjpeg8:amd64', 'libfribidi0:amd64', 'libtiff4:amd64', 'menu', 'libsm6:amd64', 'libxext6:amd64', 'libimlib2', 'libxinerama1:amd64', 'libxdmcp6:amd64', 'libjbig0:amd64', 'libxau6:amd64', 'libpng12-0:amd64', 'libxrender1:amd64', 'libxpm4:amd64', 'x11-common', 'libxrandr2:amd64', 'ttf-dejavu-core', 'libice6:amd64', 'libxft2:amd64', 'libgif4', 'libexpat1:amd64', 'fontconfig-config']
+0m26.7s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'dpkg', '--purge', 'fluxbox']
+0m26.8s DUMP: 
+  (Reading database ... 6946 files and directories currently installed.)
+  Removing fluxbox ...
+  Purging configuration files for fluxbox ...
+0m26.8s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'dpkg', '--purge', 'fluxbox']
+0m26.8s INFO: Running scripts post_purge
+0m26.8s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'tmp/scripts/post_purge_exceptions']
+0m26.8s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'tmp/scripts/post_purge_exceptions']
+0m26.8s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'dpkg', '--purge', '--pending']
+0m26.8s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'dpkg', '--purge', '--pending']
+0m26.8s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'dpkg', '--remove', '--pending']
+0m26.8s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'dpkg', '--remove', '--pending']
+0m26.8s DEBUG: Starting command: ['lsof', '-w', '+D', '/srv/piuparts.debian.org/tmp/tmp_bkAQx']
+0m27.1s DEBUG: Command failed (status=1), but ignoring error: ['lsof', '-w', '+D', '/srv/piuparts.debian.org/tmp/tmp_bkAQx']
+0m28.1s DEBUG: No broken symlinks as far as we can find.
+0m28.1s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'dpkg-divert', '--list']
+0m28.1s DUMP: 
+  diversion of /usr/share/man/man1/sh.1.gz to /usr/share/man/man1/sh.distrib.1.gz by dash
+  diversion of /bin/sh to /bin/sh.distrib by dash
+0m28.1s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'dpkg-divert', '--list']
+0m28.1s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'apt-get', 'clean']
+0m28.1s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'apt-get', 'clean']
+0m29.3s INFO: PASS: Installation and purging test.
+0m29.6s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'umount', '/proc']
+0m29.6s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_bkAQx', 'eatmydata', 'umount', '/proc']
+0m29.6s DEBUG: Starting command: ['rm', '-rf', '--one-file-system', '/srv/piuparts.debian.org/tmp/tmp_bkAQx']
+0m29.8s DEBUG: Command ok: ['rm', '-rf', '--one-file-system', '/srv/piuparts.debian.org/tmp/tmp_bkAQx']
+0m29.8s DEBUG: Removed directory tree at /srv/piuparts.debian.org/tmp/tmp_bkAQx
+0m29.8s INFO: PASS: All tests.
+0m29.8s INFO: piuparts run ends.

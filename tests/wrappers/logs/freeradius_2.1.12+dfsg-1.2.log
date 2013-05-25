@@ -1,0 +1,661 @@
+Executing: sudo env PYTHONPATH=/srv/piuparts.debian.org/lib/python2.6/dist-packages:/srv/piuparts.debian.org/lib/python2.7/dist-packages timeout -s INT -k 5m 35m /srv/piuparts.debian.org/sbin/piuparts --skip-logrotatefiles-test --warn-on-others --scriptsdir /etc/piuparts/scripts --warn-on-debsums-errors --no-eatmydata --scriptsdir /etc/piuparts/scripts-leftovers --mirror http://mirror.bm.debian.org/debian/ --tmpdir /srv/piuparts.debian.org/tmp -b /srv/piuparts.debian.org/slave/basetgz/sid_amd64.tar.gz -d sid --no-upgrade-test --apt freeradius=2.1.12+dfsg-1.2
+0m0.0s INFO: ------------------------------------------------------------------------------
+0m0.0s INFO: To quickly glance what went wrong, scroll down to the bottom of this logfile.
+0m0.0s INFO: FAQ available at http://wiki.debian.org/piuparts/FAQ
+0m0.0s INFO: ------------------------------------------------------------------------------
+0m0.0s INFO: piuparts version 0.52~201305161036~0.51-16-ge46ab19 starting up.
+0m0.0s INFO: Command line arguments: '/srv/piuparts.debian.org/sbin/piuparts' '--skip-logrotatefiles-test' '--warn-on-others' '--scriptsdir' '/etc/piuparts/scripts' '--warn-on-debsums-errors' '--no-eatmydata' '--scriptsdir' '/etc/piuparts/scripts-leftovers' '--mirror' 'http://mirror.bm.debian.org/debian/' '--tmpdir' '/srv/piuparts.debian.org/tmp' '-b' '/srv/piuparts.debian.org/slave/basetgz/sid_amd64.tar.gz' '-d' 'sid' '--no-upgrade-test' '--apt' 'freeradius=2.1.12+dfsg-1.2'
+0m0.0s INFO: Running on: Linux piu-slave-bm-a 3.2.0-4-amd64 #1 SMP Debian 3.2.41-2+deb7u2 x86_64
+0m0.0s DEBUG: Created temporary directory /srv/piuparts.debian.org/tmp/tmp_uNrnP
+0m0.0s DEBUG: Unpacking /srv/piuparts.debian.org/slave/basetgz/sid_amd64.tar.gz into /srv/piuparts.debian.org/tmp/tmp_uNrnP
+0m0.0s DEBUG: Starting command: ['tar', '-C', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', '-zxf', '/srv/piuparts.debian.org/slave/basetgz/sid_amd64.tar.gz']
+0m1.7s DEBUG: Command ok: ['tar', '-C', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', '-zxf', '/srv/piuparts.debian.org/slave/basetgz/sid_amd64.tar.gz']
+0m1.7s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'mount', '-t', 'proc', 'proc', '/proc']
+0m1.8s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'mount', '-t', 'proc', 'proc', '/proc']
+0m1.8s DEBUG: sources.list:
+  deb http://mirror.bm.debian.org/debian/ sid main
+  deb http://mirror.bm.debian.org/debian/ sid contrib
+  deb http://mirror.bm.debian.org/debian/ sid non-free
+0m1.8s DEBUG: Created policy-rc.d and chmodded it.
+0m1.8s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'apt-get', 'update']
+0m8.7s DUMP: 
+  Get:1 http://mirror.bm.debian.org sid InRelease [205 kB]
+  Get:2 http://mirror.bm.debian.org sid/main amd64 Packages [6384 kB]
+  Get:3 http://mirror.bm.debian.org sid/contrib amd64 Packages [48.2 kB]
+  Get:4 http://mirror.bm.debian.org sid/non-free amd64 Packages [85.5 kB]
+  Get:5 http://mirror.bm.debian.org sid/contrib Translation-en [39.3 kB]
+  Get:6 http://mirror.bm.debian.org sid/main Translation-en [4208 kB]
+  Get:7 http://mirror.bm.debian.org sid/non-free Translation-en [72.3 kB]
+  Fetched 11.0 MB in 5s (2177 kB/s)
+  Reading package lists...
+0m8.7s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'apt-get', 'update']
+0m8.7s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'apt-get', '-yf', 'dist-upgrade']
+0m9.3s DUMP: 
+  Reading package lists...
+  Building dependency tree...
+  0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+0m9.3s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'apt-get', '-yf', 'dist-upgrade']
+0m9.3s DEBUG: Copying scriptsdir /etc/piuparts/scripts to /srv/piuparts.debian.org/tmp/tmp_uNrnP/tmp/scripts/
+0m9.3s DEBUG: Copying scriptsdir /etc/piuparts/scripts-leftovers to /srv/piuparts.debian.org/tmp/tmp_uNrnP/tmp/scripts/
+0m9.3s INFO: Running scripts post_setup
+0m9.3s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'tmp/scripts/post_setup_experimental']
+0m9.3s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'tmp/scripts/post_setup_experimental']
+0m9.3s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'tmp/scripts/post_setup_fake-essential']
+0m10.9s DUMP: 
+  *** Adding fake essential packages ***
+  Reading package lists...
+  Building dependency tree...
+  The following extra packages will be installed:
+    ucf
+  Suggested packages:
+    virtual-mysql-client mysql-client postgresql-client
+  The following NEW packages will be installed:
+    dbconfig-common ucf
+  0 upgraded, 2 newly installed, 0 to remove and 0 not upgraded.
+  Need to get 559 kB of archives.
+  After this operation, 1443 kB of additional disk space will be used.
+  Get:1 http://mirror.bm.debian.org/debian/ sid/main ucf all 3.0027 [71.4 kB]
+  Get:2 http://mirror.bm.debian.org/debian/ sid/main dbconfig-common all 1.8.47+nmu1 [487 kB]
+  debconf: delaying package configuration, since apt-utils is not installed
+  Fetched 559 kB in 0s (14.5 MB/s)
+  Selecting previously unselected package ucf.
+  (Reading database ... 6672 files and directories currently installed.)
+  Unpacking ucf (from .../archives/ucf_3.0027_all.deb) ...
+  Moving old data out of the way
+  Selecting previously unselected package dbconfig-common.
+  Unpacking dbconfig-common (from .../dbconfig-common_1.8.47+nmu1_all.deb) ...
+  Setting up ucf (3.0027) ...
+  Setting up dbconfig-common (1.8.47+nmu1) ...
+  
+  Creating config file /etc/dbconfig-common/config with new version
+0m10.9s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'tmp/scripts/post_setup_fake-essential']
+0m10.9s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'tmp/scripts/post_setup_forbid_home']
+0m10.9s DUMP: 
+  Disabling /home
+0m10.9s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'tmp/scripts/post_setup_forbid_home']
+0m10.9s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'tmp/scripts/post_setup_squeeze-backports']
+0m10.9s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'tmp/scripts/post_setup_squeeze-backports']
+0m10.9s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'apt-get', 'clean']
+0m10.9s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'apt-get', 'clean']
+0m11.5s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'dpkg', '--get-selections', '*']
+0m11.5s DUMP: 
+  apt						install
+  base-files					install
+  base-passwd					install
+  bash						install
+  bsdutils					install
+  coreutils					install
+  dash						install
+  dbconfig-common					install
+  debconf						install
+  debconf-i18n					install
+  debian-archive-keyring				install
+  debianutils					install
+  diffutils					install
+  dpkg						install
+  e2fslibs:amd64					install
+  e2fsprogs					install
+  findutils					install
+  gcc-4.7-base:amd64				install
+  gcc-4.8-base:amd64				install
+  gnupg						install
+  gpgv						install
+  grep						install
+  gzip						install
+  hostname					install
+  initscripts					install
+  insserv						install
+  libacl1:amd64					install
+  libapt-pkg4.12:amd64				install
+  libattr1:amd64					install
+  libblkid1:amd64					install
+  libbz2-1.0:amd64				install
+  libc-bin					install
+  libc6:amd64					install
+  libcap2:amd64					install
+  libcomerr2:amd64				install
+  libdb5.1:amd64					install
+  libgcc1:amd64					install
+  liblocale-gettext-perl				install
+  liblzma5:amd64					install
+  libmount1					install
+  libncurses5:amd64				install
+  libpam-modules:amd64				install
+  libpam-modules-bin				install
+  libpam-runtime					install
+  libpam0g:amd64					install
+  libpcre3:amd64					install
+  libreadline6:amd64				install
+  libselinux1:amd64				install
+  libsemanage-common				install
+  libsemanage1:amd64				install
+  libsepol1:amd64					install
+  libslang2:amd64					install
+  libss2:amd64					install
+  libstdc++6:amd64				install
+  libtext-charwidth-perl				install
+  libtext-iconv-perl				install
+  libtext-wrapi18n-perl				install
+  libtinfo5:amd64					install
+  libusb-0.1-4:amd64				install
+  libustr-1.0-1:amd64				install
+  libuuid1:amd64					install
+  login						install
+  lsb-base					install
+  mawk						install
+  mount						install
+  multiarch-support				install
+  ncurses-base					install
+  ncurses-bin					install
+  passwd						install
+  perl-base					install
+  readline-common					install
+  sed						install
+  sensible-utils					install
+  sysv-rc						install
+  sysvinit					install
+  sysvinit-utils					install
+  tar						install
+  tzdata						install
+  ucf						install
+  util-linux					install
+  xz-utils					install
+  zlib1g:amd64					install
+0m11.5s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'dpkg', '--get-selections', '*']
+0m11.5s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'dpkg-divert', '--list']
+0m11.5s DUMP: 
+  diversion of /usr/share/man/man1/sh.1.gz to /usr/share/man/man1/sh.distrib.1.gz by dash
+  diversion of /bin/sh to /bin/sh.distrib by dash
+0m11.5s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'dpkg-divert', '--list']
+0m11.5s INFO: apt-cache does not know about any of the requested packages
+0m11.5s INFO: Running scripts pre_test
+0m11.5s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'tmp/scripts/pre_test_root_password']
+0m11.5s DUMP: 
+  Enter new UNIX password: Retype new UNIX password: passwd: password updated successfully
+0m11.5s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'tmp/scripts/pre_test_root_password']
+0m11.5s INFO: Running scripts pre_install
+0m11.5s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'tmp/scripts/pre_install_exceptions']
+0m11.6s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'tmp/scripts/pre_install_exceptions']
+0m11.6s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'tmp/scripts/pre_install_foreign_architecture_i386']
+0m11.6s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'tmp/scripts/pre_install_foreign_architecture_i386']
+0m11.6s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'apt-cache', 'show', 'freeradius']
+0m13.3s DUMP: 
+  Package: freeradius
+  Version: 2.1.12+dfsg-1.2
+  Installed-Size: 1922
+  Maintainer: Josip Rodin <joy-packages@debian.org>
+  Architecture: amd64
+  Provides: radius-server
+  Depends: lsb-base (>= 3.1-23.2), libc6 (>= 2.4), libfreeradius2 (= 2.1.12+dfsg-1.2), libgdbm3 (>= 1.8.3), libltdl7 (>= 2.4.2), libpam0g (>= 0.99.7.1), libperl5.14 (>= 5.14.2), libpython2.7 (>= 2.7), libssl1.0.0 (>= 1.0.0), zlib1g (>= 1:1.1.4), freeradius-common, ssl-cert, ca-certificates, adduser
+  Recommends: freeradius-utils
+  Suggests: freeradius-ldap, freeradius-postgresql, freeradius-mysql, freeradius-krb5
+  Description-en: high-performance and highly configurable RADIUS server
+   FreeRADIUS is a high-performance RADIUS server with support for:
+    - many vendor-specific attributes
+    - proxying and replicating requests by any criteria
+    - authentication on system passwd, SQL, Kerberos, LDAP, users file, or PAM
+    - multiple DEFAULT configurations
+    - regexp matching in string attributes
+   and lots more.
+  Homepage: http://www.freeradius.org/
+  Description-md5: 55219a1267c72db69e230159726b4e4e
+  Tag: implemented-in::c, interface::daemon, network::server, protocol::radius,
+   role::program, security::authentication, works-with::db
+  Section: net
+  Priority: optional
+  Filename: pool/main/f/freeradius/freeradius_2.1.12+dfsg-1.2_amd64.deb
+  Size: 720186
+  MD5sum: c8c9c6d0d4b2aaecb772d1f822ea5e3a
+  SHA1: 26f52e1238eae32d23084ff3dfd5185e75d112a2
+  SHA256: 8cf6f1e98e10d044474214485ad9d610afe55709b7042916bcc07e5706c1a948
+0m13.3s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'apt-cache', 'show', 'freeradius']
+0m13.3s DEBUG: Starting command: ['dpkg-deb', '-b', '--nocheck', '/srv/piuparts.debian.org/tmp/tmpoWrKiM/piuparts-depends-dummy']
+0m13.3s DUMP: 
+  dpkg-deb: warning: not checking contents of control area
+  dpkg-deb: building an unknown package in '/srv/piuparts.debian.org/tmp/tmpoWrKiM/piuparts-depends-dummy.deb'.
+0m13.3s DEBUG: Command ok: ['dpkg-deb', '-b', '--nocheck', '/srv/piuparts.debian.org/tmp/tmpoWrKiM/piuparts-depends-dummy']
+0m13.3s DEBUG: Copying /srv/piuparts.debian.org/tmp/tmpoWrKiM/piuparts-depends-dummy.deb to /srv/piuparts.debian.org/tmp/tmp_uNrnP/tmp
+0m13.3s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'dpkg', '-i', 'tmp/piuparts-depends-dummy.deb']
+0m13.4s DUMP: 
+  Selecting previously unselected package piuparts-depends-dummy.
+  (Reading database ... 6926 files and directories currently installed.)
+  Unpacking piuparts-depends-dummy (from tmp/piuparts-depends-dummy.deb) ...
+  dpkg: dependency problems prevent configuration of piuparts-depends-dummy:
+   piuparts-depends-dummy depends on libfreeradius2 (= 2.1.12+dfsg-1.2); however:
+    Package libfreeradius2 is not installed.
+   piuparts-depends-dummy depends on libgdbm3 (>= 1.8.3); however:
+    Package libgdbm3 is not installed.
+   piuparts-depends-dummy depends on libltdl7 (>= 2.4.2); however:
+    Package libltdl7 is not installed.
+   piuparts-depends-dummy depends on libperl5.14 (>= 5.14.2); however:
+    Package libperl5.14 is not installed.
+   piuparts-depends-dummy depends on libpython2.7 (>= 2.7); however:
+    Package libpython2.7 is not installed.
+   piuparts-depends-dummy depends on libssl1.0.0 (>= 1.0.0); however:
+    Package libssl1.0.0 is not installed.
+   piuparts-depends-dummy depends on freeradius-common; however:
+    Package freeradius-common is not installed.
+   piuparts-depends-dummy depends on ssl-cert; however:
+    Package ssl-cert is not installed.
+   piuparts-depends-dummy depends on ca-certificates; however:
+    Package ca-certificates is not installe
+  dpkg: error processing piuparts-depends-dummy (--install):
+   dependency problems - leaving unconfigured
+  Errors were encountered while processing:
+   piuparts-depends-dummy
+0m13.4s DEBUG: Command failed (status=1), but ignoring error: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'dpkg', '-i', 'tmp/piuparts-depends-dummy.deb']
+0m13.4s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'apt-get', '-yf', 'install']
+0m21.5s DUMP: 
+  Reading package lists...
+  Building dependency tree...
+  Reading state information...
+  Correcting dependencies... Done
+  The following extra packages will be installed:
+    adduser ca-certificates freeradius-common libexpat1 libffi6 libfreeradius2
+    libgdbm3 libltdl7 libncursesw5 libperl5.14 libpython2.7 libpython2.7-minimal
+    libpython2.7-stdlib libsqlite3-0 libssl1.0.0 mime-support openssl ssl-cert
+  Suggested packages:
+    perl-modules openssl-blacklist
+  Recommended packages:
+    libgpm2 file
+  The following NEW packages will be installed:
+    adduser ca-certificates freeradius-common libexpat1 libffi6 libfreeradius2
+    libgdbm3 libltdl7 libncursesw5 libperl5.14 libpython2.7 libpython2.7-minimal
+    libpython2.7-stdlib libsqlite3-0 libssl1.0.0 mime-support openssl ssl-cert
+  0 upgraded, 18 newly installed, 0 to remove and 0 not upgraded.
+  1 not fully installed or removed.
+  Need to get 8262 kB of archives.
+  After this operation, 23.6 MB of additional disk space will be used.
+  Get:1 http://mirror.bm.debian.org/debian/ sid/main libfreeradius2 amd64 2.1.12+dfsg-1.2 [120 kB]
+  Get:2 http://mirror.bm.debian.org/debian/ sid/main libgdbm3 amd64 1.8.3-11 [46.9 kB]
+  Get:3 http://mirror.bm.debian.org/debian/ sid/main libltdl7 amd64 2.4.2-1.2 [352 kB]
+  Get:4 http://mirror.bm.debian.org/debian/ sid/main libperl5.14 amd64 5.14.2-21 [1174 B]
+  Get:5 http://mirror.bm.debian.org/debian/ sid/main libpython2.7-minimal amd64 2.7.5-3 [542 kB]
+  Get:6 http://mirror.bm.debian.org/debian/ sid/main mime-support all 3.54 [36.4 kB]
+  Get:7 http://mirror.bm.debian.org/debian/ sid/main libexpat1 amd64 2.1.0-3 [139 kB]
+  Get:8 http://mirror.bm.debian.org/debian/ sid/main libffi6 amd64 3.0.13-4 [21.6 kB]
+  Get:9 http://mirror.bm.debian.org/debian/ sid/main libncursesw5 amd64 5.9+20130504-1 [140 kB]
+  Get:10 http://mirror.bm.debian.org/debian/ sid/main libsqlite3-0 amd64 3.7.16.2-1 [469 kB]
+  Get:11 http://mirror.bm.debian.org/debian/ sid/main libssl1.0.0 amd64 1.0.1e-2 [1219 kB]
+  Get:12 http://mirror.bm.debian.org/debian/ sid/main libpython2.7-stdlib amd64 2.7.5-3 [2457 kB]
+  Get:13 http://mirror.bm.debian.org/debian/ sid/main libpython2.7 amd64 2.7.5-3 [1276 kB]
+  Get:14 http://mirror.bm.debian.org/debian/ sid/main adduser all 3.113+nmu3 [264 kB]
+  Get:15 http://mirror.bm.debian.org/debian/ sid/main freeradius-common all 2.1.12+dfsg-1.2 [273 kB]
+  Get:16 http://mirror.bm.debian.org/debian/ sid/main openssl amd64 1.0.1e-2 [699 kB]
+  Get:17 http://mirror.bm.debian.org/debian/ sid/main ssl-cert all 1.0.32 [19.5 kB]
+  Get:18 http://mirror.bm.debian.org/debian/ sid/main ca-certificates all 20130119 [185 kB]
+  debconf: delaying package configuration, since apt-utils is not installed
+  Fetched 8262 kB in 0s (17.5 MB/s)
+  Selecting previously unselected package libfreeradius2.
+  (Reading database ... 6926 files and directories currently installed.)
+  Unpacking libfreeradius2 (from .../libfreeradius2_2.1.12+dfsg-1.2_amd64.deb) ...
+  Selecting previously unselected package libgdbm3:amd64.
+  Unpacking libgdbm3:amd64 (from .../libgdbm3_1.8.3-11_amd64.deb) ...
+  Selecting previously unselected package libltdl7:amd64.
+  Unpacking libltdl7:amd64 (from .../libltdl7_2.4.2-1.2_amd64.deb) ...
+  Selecting previously unselected package libperl5.14.
+  Unpacking libperl5.14 (from .../libperl5.14_5.14.2-21_amd64.deb) ...
+  Selecting previously unselected package libpython2.7-minimal.
+  Unpacking libpython2.7-minimal (from .../libpython2.7-minimal_2.7.5-3_amd64.deb) ...
+  Selecting previously unselected package mime-support.
+  Unpacking mime-support (from .../mime-support_3.54_all.deb) ...
+  Selecting previously unselected package libexpat1:amd64.
+  Unpacking libexpat1:amd64 (from .../libexpat1_2.1.0-3_amd64.deb) ...
+  Selecting previously unselected package libffi6:amd64.
+  Unpacking libffi6:amd64 (from .../libffi6_3.0.13-4_amd64.deb) ...
+  Selecting previously unselected package libncursesw5:amd64.
+  Unpacking libncursesw5:amd64 (from .../libncursesw5_5.9+20130504-1_amd64.deb) ...
+  Selecting previously unselected package libsqlite3-0:amd64.
+  Unpacking libsqlite3-0:amd64 (from .../libsqlite3-0_3.7.16.2-1_amd64.deb) ...
+  Selecting previously unselected package libssl1.0.0:amd64.
+  Unpacking libssl1.0.0:amd64 (from .../libssl1.0.0_1.0.1e-2_amd64.deb) ...
+  Selecting previously unselected package libpython2.7-stdlib.
+  Unpacking libpython2.7-stdlib (from .../libpython2.7-stdlib_2.7.5-3_amd64.deb) ...
+  Selecting previously unselected package libpython2.7.
+  Unpacking libpython2.7 (from .../libpython2.7_2.7.5-3_amd64.deb) ...
+  Selecting previously unselected package adduser.
+  Unpacking adduser (from .../adduser_3.113+nmu3_all.deb) ...
+  Selecting previously unselected package freeradius-common.
+  Unpacking freeradius-common (from .../freeradius-common_2.1.12+dfsg-1.2_all.deb) ...
+  Selecting previously unselected package openssl.
+  Unpacking openssl (from .../openssl_1.0.1e-2_amd64.deb) ...
+  Selecting previously unselected package ssl-cert.
+  Unpacking ssl-cert (from .../ssl-cert_1.0.32_all.deb) ...
+  Selecting previously unselected package ca-certificates.
+  Unpacking ca-certificates (from .../ca-certificates_20130119_all.deb) ...
+  Setting up libfreeradius2 (2.1.12+dfsg-1.2) ...
+  Setting up libgdbm3:amd64 (1.8.3-11) ...
+  Setting up libltdl7:amd64 (2.4.2-1.2) ...
+  Setting up libperl5.14 (5.14.2-21) ...
+  Setting up libpython2.7-minimal (2.7.5-3) ...
+  Setting up mime-support (3.54) ...
+  update-alternatives: using /usr/bin/see to provide /usr/bin/view (view) in auto mode
+  Setting up libexpat1:amd64 (2.1.0-3) ...
+  Setting up libffi6:amd64 (3.0.13-4) ...
+  Setting up libncursesw5:amd64 (5.9+20130504-1) ...
+  Setting up libsqlite3-0:amd64 (3.7.16.2-1) ...
+  Setting up libssl1.0.0:amd64 (1.0.1e-2) ...
+  Setting up libpython2.7-stdlib (2.7.5-3) ...
+  Setting up libpython2.7 (2.7.5-3) ...
+  Setting up adduser (3.113+nmu3) ...
+  Setting up freeradius-common (2.1.12+dfsg-1.2) ...
+  Adding user freerad to group shadow
+  Setting up openssl (1.0.1e-2) ...
+  Setting up ssl-cert (1.0.32) ...
+  Setting up ca-certificates (20130119) ...
+  Setting up piuparts-depends-dummy (0.invalid.0) ...
+  Processing triggers for libc-bin ...
+  ldconfig deferred processing now taking place
+  Processing triggers for ca-certificates ...
+  Updating certificates in /etc/ssl/certs... 158 added, 0 removed; done.
+  Running hooks in /etc/ca-certificates/update.d....done.
+0m21.5s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'apt-get', '-yf', 'install']
+0m21.5s INFO: Installation of ['tmp/piuparts-depends-dummy.deb'] ok
+0m21.5s DEBUG: Removing /srv/piuparts.debian.org/tmp/tmp_uNrnP/tmp/piuparts-depends-dummy.deb
+0m21.5s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'dpkg', '--purge', 'piuparts-depends-dummy']
+0m21.5s DUMP: 
+  (Reading database ... 8319 files and directories currently installed.)
+  Removing piuparts-depends-dummy ...
+0m21.5s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'dpkg', '--purge', 'piuparts-depends-dummy']
+0m21.5s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'apt-get', 'clean']
+0m21.5s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'apt-get', 'clean']
+0m22.1s DEBUG: Starting command: ['lsof', '-w', '+D', '/srv/piuparts.debian.org/tmp/tmp_uNrnP']
+0m22.5s DEBUG: Command failed (status=1), but ignoring error: ['lsof', '-w', '+D', '/srv/piuparts.debian.org/tmp/tmp_uNrnP']
+0m23.7s DEBUG: No broken symlinks as far as we can find.
+0m23.7s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'apt-cache', 'policy']
+0m25.6s DUMP: 
+  Package files:
+   100 /var/lib/dpkg/status
+       release a=now
+   500 http://mirror.bm.debian.org/debian/ sid/non-free Translation-en
+   500 http://mirror.bm.debian.org/debian/ sid/main Translation-en
+   500 http://mirror.bm.debian.org/debian/ sid/contrib Translation-en
+   500 http://mirror.bm.debian.org/debian/ sid/non-free amd64 Packages
+       release o=Debian,a=unstable,n=sid,l=Debian,c=non-free
+       origin mirror.bm.debian.org
+   500 http://mirror.bm.debian.org/debian/ sid/contrib amd64 Packages
+       release o=Debian,a=unstable,n=sid,l=Debian,c=contrib
+       origin mirror.bm.debian.org
+   500 http://mirror.bm.debian.org/debian/ sid/main amd64 Packages
+       release o=Debian,a=unstable,n=sid,l=Debian,c=main
+       origin mirror.bm.debian.org
+  Pinned packages:
+0m25.6s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'apt-cache', 'policy']
+0m25.6s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'apt-cache', 'policy', 'freeradius']
+0m25.6s DUMP: 
+  freeradius:
+    Installed: (none)
+    Candidate: 2.1.12+dfsg-1.2
+    Version table:
+       2.1.12+dfsg-1.2 0
+          500 http://mirror.bm.debian.org/debian/ sid/main amd64 Packages
+0m25.6s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'apt-cache', 'policy', 'freeradius']
+0m25.6s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'apt-get', '-y', 'install', 'freeradius=2.1.12+dfsg-1.2']
+0m32.4s DUMP: 
+  Reading package lists...
+  Building dependency tree...
+  Reading state information...
+  Suggested packages:
+    freeradius-ldap freeradius-postgresql freeradius-mysql freeradius-krb5
+  Recommended packages:
+    freeradius-utils
+  The following NEW packages will be installed:
+    freeradius
+  0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
+  Need to get 720 kB of archives.
+  After this operation, 1968 kB of additional disk space will be used.
+  Get:1 http://mirror.bm.debian.org/debian/ sid/main freeradius amd64 2.1.12+dfsg-1.2 [720 kB]
+  debconf: delaying package configuration, since apt-utils is not installed
+  Fetched 720 kB in 0s (17.4 MB/s)
+  Selecting previously unselected package freeradius.
+  (Reading database ... 8319 files and directories currently installed.)
+  Unpacking freeradius (from .../freeradius_2.1.12+dfsg-1.2_amd64.deb) ...
+  Setting up freeradius (2.1.12+dfsg-1.2) ...
+  dpkg-statoverride: warning: --update given but /var/run/freeradius does not exist
+  Updating default SSL certificate settings, if any...
+  Adding user freerad to group ssl-cert
+  Generating DH parameters, 1024 bit long safe prime, generator 2
+  This is going to take a long time
+  ................................................................................+........+.....................................................................+........................................+...........................+.........................................................+..................................+......................................................................................................+..........+................................+...................................+..+................................................+..................+.................................+..........+...............................+.....................................+.......................+..............+.............................+.........................................................................+........................+................................+.....................+.......................+.....++*++*++*
+  invoke-rc.d: policy-rc.d denied execution of start.
+0m32.4s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'apt-get', '-y', 'install', 'freeradius=2.1.12+dfsg-1.2']
+0m32.4s INFO: Running scripts post_install
+0m32.4s DEBUG: Starting command: ['lsof', '-w', '+D', '/srv/piuparts.debian.org/tmp/tmp_uNrnP']
+0m32.7s DEBUG: Command failed (status=1), but ignoring error: ['lsof', '-w', '+D', '/srv/piuparts.debian.org/tmp/tmp_uNrnP']
+0m34.0s DEBUG: No broken symlinks as far as we can find.
+0m34.0s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'dpkg', '--get-selections', '*']
+0m34.0s DUMP: 
+  adduser						install
+  apt						install
+  base-files					install
+  base-passwd					install
+  bash						install
+  bsdutils					install
+  ca-certificates					install
+  coreutils					install
+  dash						install
+  dbconfig-common					install
+  debconf						install
+  debconf-i18n					install
+  debian-archive-keyring				install
+  debianutils					install
+  diffutils					install
+  dpkg						install
+  e2fslibs:amd64					install
+  e2fsprogs					install
+  findutils					install
+  freeradius					install
+  freeradius-common				install
+  gcc-4.7-base:amd64				install
+  gcc-4.8-base:amd64				install
+  gnupg						install
+  gpgv						install
+  grep						install
+  gzip						install
+  hostname					install
+  initscripts					install
+  insserv						install
+  libacl1:amd64					install
+  libapt-pkg4.12:amd64				install
+  libattr1:amd64					install
+  libblkid1:amd64					install
+  libbz2-1.0:amd64				install
+  libc-bin					install
+  libc6:amd64					install
+  libcap2:amd64					install
+  libcomerr2:amd64				install
+  libdb5.1:amd64					install
+  libexpat1:amd64					install
+  libffi6:amd64					install
+  libfreeradius2					install
+  libgcc1:amd64					install
+  libgdbm3:amd64					install
+  liblocale-gettext-perl				install
+  libltdl7:amd64					install
+  liblzma5:amd64					install
+  libmount1					install
+  libncurses5:amd64				install
+  libncursesw5:amd64				install
+  libpam-modules:amd64				install
+  libpam-modules-bin				install
+  libpam-runtime					install
+  libpam0g:amd64					install
+  libpcre3:amd64					install
+  libperl5.14					install
+  libpython2.7					install
+  libpython2.7-minimal				install
+  libpython2.7-stdlib				install
+  libreadline6:amd64				install
+  libselinux1:amd64				install
+  libsemanage-common				install
+  libsemanage1:amd64				install
+  libsepol1:amd64					install
+  libslang2:amd64					install
+  libsqlite3-0:amd64				install
+  libss2:amd64					install
+  libssl1.0.0:amd64				install
+  libstdc++6:amd64				install
+  libtext-charwidth-perl				install
+  libtext-iconv-perl				install
+  libtext-wrapi18n-perl				install
+  libtinfo5:amd64					install
+  libusb-0.1-4:amd64				install
+  libustr-1.0-1:amd64				install
+  libuuid1:amd64					install
+  login						install
+  lsb-base					install
+  mawk						install
+  mime-support					install
+  mount						install
+  multiarch-support				install
+  ncurses-base					install
+  ncurses-bin					install
+  openssl						install
+  passwd						install
+  perl-base					install
+  readline-common					install
+  sed						install
+  sensible-utils					install
+  ssl-cert					install
+  sysv-rc						install
+  sysvinit					install
+  sysvinit-utils					install
+  tar						install
+  tzdata						install
+  ucf						install
+  util-linux					install
+  xz-utils					install
+  zlib1g:amd64					install
+0m34.0s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'dpkg', '--get-selections', '*']
+0m34.7s DEBUG: Starting command: ['debsums', '--root', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', '-ac']
+0m35.5s DEBUG: Command ok: ['debsums', '--root', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', '-ac']
+0m35.5s INFO: Running scripts pre_remove
+0m35.5s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'tmp/scripts/pre_remove_40_find_obsolete_conffiles']
+0m35.5s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'tmp/scripts/pre_remove_40_find_obsolete_conffiles']
+0m35.5s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'tmp/scripts/pre_remove_50_find_bad_permissions']
+0m35.5s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'tmp/scripts/pre_remove_50_find_bad_permissions']
+0m35.5s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'tmp/scripts/pre_remove_50_find_missing_copyright']
+0m35.5s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'tmp/scripts/pre_remove_50_find_missing_copyright']
+0m35.5s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'tmp/scripts/pre_remove_exceptions']
+0m35.7s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'tmp/scripts/pre_remove_exceptions']
+0m35.7s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'tmp/scripts/pre_remove_preseed_cleanup']
+0m35.7s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'tmp/scripts/pre_remove_preseed_cleanup']
+0m35.7s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'apt-get', 'remove', 'libpython2.7-minimal', 'libperl5.14', 'libpython2.7', 'adduser', 'libexpat1:amd64', 'libltdl7:amd64', 'libssl1.0.0:amd64', 'libgdbm3:amd64', 'openssl', 'libncursesw5:amd64', 'ca-certificates', 'ssl-cert', 'libfreeradius2', 'freeradius-common', 'libffi6:amd64', 'libpython2.7-stdlib', 'mime-support', 'libsqlite3-0:amd64', 'freeradius']
+0m37.5s DUMP: 
+  Reading package lists...
+  Building dependency tree...
+  Reading state information...
+  The following packages will be REMOVED:
+    adduser ca-certificates freeradius freeradius-common libexpat1 libffi6
+    libfreeradius2 libgdbm3 libltdl7 libncursesw5 libperl5.14 libpython2.7
+    libpython2.7-minimal libpython2.7-stdlib libsqlite3-0 libssl1.0.0
+    mime-support openssl ssl-cert
+  0 upgraded, 0 newly installed, 19 to remove and 0 not upgraded.
+  After this operation, 25.6 MB disk space will be freed.
+  (Reading database ... 8615 files and directories currently installed.)
+  Removing freeradius ...
+  invoke-rc.d: policy-rc.d denied execution of stop.
+  Removing ssl-cert ...
+  Removing freeradius-common ...
+  Removing adduser ...
+  Removing ca-certificates ...
+  Removing dangling symlinks from /etc/ssl/certs... done.
+  Removing libpython2.7 ...
+  Removing libpython2.7-stdlib ...
+  Removing libexpat1:amd64 ...
+  Removing libffi6:amd64 ...
+  Removing libfreeradius2 ...
+  Removing libgdbm3:amd64 ...
+  Removing libltdl7:amd64 ...
+  Removing libncursesw5:amd64 ...
+  Removing libperl5.14 ...
+  Removing libpython2.7-minimal ...
+  Removing libsqlite3-0:amd64 ...
+  Removing openssl ...
+  Removing libssl1.0.0:amd64 ...
+  Removing mime-support ...
+  Processing triggers for libc-bin ...
+  ldconfig deferred processing now taking place
+0m37.5s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'apt-get', 'remove', 'libpython2.7-minimal', 'libperl5.14', 'libpython2.7', 'adduser', 'libexpat1:amd64', 'libltdl7:amd64', 'libssl1.0.0:amd64', 'libgdbm3:amd64', 'openssl', 'libncursesw5:amd64', 'ca-certificates', 'ssl-cert', 'libfreeradius2', 'freeradius-common', 'libffi6:amd64', 'libpython2.7-stdlib', 'mime-support', 'libsqlite3-0:amd64', 'freeradius']
+0m37.5s INFO: Running scripts post_remove
+0m37.5s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'tmp/scripts/post_remove_cleanup']
+0m37.5s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'tmp/scripts/post_remove_cleanup']
+0m37.5s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'dpkg', '--purge', 'libpython2.7-minimal', 'libperl5.14', 'libpython2.7', 'adduser', 'libexpat1:amd64', 'libltdl7:amd64', 'libssl1.0.0:amd64', 'libgdbm3:amd64', 'openssl', 'libncursesw5:amd64', 'ca-certificates', 'ssl-cert', 'libfreeradius2', 'freeradius-common', 'libffi6:amd64', 'libpython2.7-stdlib', 'mime-support', 'libsqlite3-0:amd64']
+0m38.3s DUMP: 
+  (Reading database ... 7035 files and directories currently installed.)
+  Removing libpython2.7-minimal ...
+  Purging configuration files for libpython2.7-minimal ...
+  dpkg: warning: ignoring request to remove libperl5.14 which isn't installed
+  Removing libpython2.7 ...
+  Purging configuration files for libpython2.7 ...
+  Removing adduser ...
+  Purging configuration files for adduser ...
+  Removing libexpat1:amd64 ...
+  Purging configuration files for libexpat1:amd64 ...
+  Removing libltdl7:amd64 ...
+  Purging configuration files for libltdl7:amd64 ...
+  Removing libssl1.0.0:amd64 ...
+  Purging configuration files for libssl1.0.0:amd64 ...
+  Removing libgdbm3:amd64 ...
+  Purging configuration files for libgdbm3:amd64 ...
+  Removing openssl ...
+  Purging configuration files for openssl ...
+  dpkg: warning: while removing openssl, directory '/etc/ssl/certs' not empty so not removed
+  dpkg: warning: while removing openssl, directory '/etc/ssl/private' not empty so not removed
+  Removing libncursesw5:amd64 ...
+  Purging configuration files for libncursesw5:amd64 ...
+  Removing ca-certificates ...
+  Purging configuration files for ca-certificates ...
+  Removing dangling symlinks from /etc/ssl/certs... done.
+  Removing ssl-cert ...
+  Purging configuration files for ssl-cert ...
+  dpkg: warning: ignoring request to remove libfreeradius2 which isn't installed
+  Removing freeradius-common ...
+  Purging configuration files for freeradius-common ...
+  chgrp: cannot dereference '/etc/freeradius/certs/ca.pem': No such file or directory
+  chgrp: cannot dereference '/etc/freeradius/certs/server.key': No such file or directory
+  chgrp: cannot dereference '/etc/freeradius/certs/server.pem': No such file or directory
+  /var/lib/dpkg/info/freeradius-common.postrm: 17: /var/lib/dpkg/info/freeradius-common.postrm: deluser: not found
+  /var/lib/dpkg/info/freeradius-common.postrm: 18: /var/lib/dpkg/info/freeradius-common.postrm: deluser: not found
+  /var/lib/dpkg/info/freeradius-common.postrm: 21: /var/lib/dpkg/info/freeradius-common.postrm: delgroup: not found
+  Removing libffi6:amd64 ...
+  Purging configuration files for libffi6:amd64 ...
+  dpkg: warning: ignoring request to remove libpython2.7-stdlib which isn't installed
+  Removing mime-support ...
+  Purging configuration files for mime-support ...
+  Removing libsqlite3-0:amd64 ...
+  Purging configuration files for libsqlite3-0:amd64 ...
+0m38.3s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'dpkg', '--purge', 'libpython2.7-minimal', 'libperl5.14', 'libpython2.7', 'adduser', 'libexpat1:amd64', 'libltdl7:amd64', 'libssl1.0.0:amd64', 'libgdbm3:amd64', 'openssl', 'libncursesw5:amd64', 'ca-certificates', 'ssl-cert', 'libfreeradius2', 'freeradius-common', 'libffi6:amd64', 'libpython2.7-stdlib', 'mime-support', 'libsqlite3-0:amd64']
+0m38.3s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'dpkg', '--purge', 'freeradius']
+0m38.4s DUMP: 
+  (Reading database ... 7024 files and directories currently installed.)
+  Removing freeradius ...
+  Purging configuration files for freeradius ...
+0m38.4s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'dpkg', '--purge', 'freeradius']
+0m38.4s INFO: Running scripts post_purge
+0m38.4s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'tmp/scripts/post_purge_exceptions']
+0m38.4s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'tmp/scripts/post_purge_exceptions']
+0m38.4s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'dpkg', '--purge', '--pending']
+0m38.4s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'dpkg', '--purge', '--pending']
+0m38.4s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'dpkg', '--remove', '--pending']
+0m38.5s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'dpkg', '--remove', '--pending']
+0m38.5s DEBUG: Starting command: ['lsof', '-w', '+D', '/srv/piuparts.debian.org/tmp/tmp_uNrnP']
+0m38.7s DEBUG: Command failed (status=1), but ignoring error: ['lsof', '-w', '+D', '/srv/piuparts.debian.org/tmp/tmp_uNrnP']
+0m39.6s DEBUG: No broken symlinks as far as we can find.
+0m39.6s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'dpkg-divert', '--list']
+0m39.7s DUMP: 
+  diversion of /usr/share/man/man1/sh.1.gz to /usr/share/man/man1/sh.distrib.1.gz by dash
+  diversion of /bin/sh to /bin/sh.distrib by dash
+0m39.7s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'dpkg-divert', '--list']
+0m39.7s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'apt-get', 'clean']
+0m39.7s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'apt-get', 'clean']
+0m40.9s ERROR: FAIL: Package purging left files on system:
+  /root/.rnd	 not owned
+
+0m40.9s ERROR: FAIL: Installation and purging test.
+0m41.2s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'umount', '/proc']
+0m41.2s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmp_uNrnP', 'umount', '/proc']
+0m41.2s DEBUG: Starting command: ['rm', '-rf', '--one-file-system', '/srv/piuparts.debian.org/tmp/tmp_uNrnP']
+0m41.3s DEBUG: Command ok: ['rm', '-rf', '--one-file-system', '/srv/piuparts.debian.org/tmp/tmp_uNrnP']
+0m41.3s DEBUG: Removed directory tree at /srv/piuparts.debian.org/tmp/tmp_uNrnP
+0m41.3s ERROR: piuparts run ends.

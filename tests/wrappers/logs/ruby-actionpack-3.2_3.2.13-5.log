@@ -1,0 +1,354 @@
+Executing: sudo env PYTHONPATH=/srv/piuparts.debian.org/lib/python2.6/dist-packages:/srv/piuparts.debian.org/lib/python2.7/dist-packages timeout -s INT -k 5m 35m /srv/piuparts.debian.org/sbin/piuparts --skip-logrotatefiles-test --warn-on-others --scriptsdir /etc/piuparts/scripts --no-eatmydata --scriptsdir /etc/piuparts/scripts-leftovers --mirror http://mirror.bm.debian.org/debian/ --tmpdir /srv/piuparts.debian.org/tmp -b /srv/piuparts.debian.org/slave/basetgz/sid_amd64.tar.gz -d sid --no-upgrade-test --apt ruby-actionpack-3.2=3.2.13-5
+0m0.0s INFO: ------------------------------------------------------------------------------
+0m0.0s INFO: To quickly glance what went wrong, scroll down to the bottom of this logfile.
+0m0.0s INFO: FAQ available at http://wiki.debian.org/piuparts/FAQ
+0m0.0s INFO: ------------------------------------------------------------------------------
+0m0.0s INFO: piuparts version 0.52~201305231440~0.51-39-g4559ce8 starting up.
+0m0.0s INFO: Command line arguments: '/srv/piuparts.debian.org/sbin/piuparts' '--skip-logrotatefiles-test' '--warn-on-others' '--scriptsdir' '/etc/piuparts/scripts' '--no-eatmydata' '--scriptsdir' '/etc/piuparts/scripts-leftovers' '--mirror' 'http://mirror.bm.debian.org/debian/' '--tmpdir' '/srv/piuparts.debian.org/tmp' '-b' '/srv/piuparts.debian.org/slave/basetgz/sid_amd64.tar.gz' '-d' 'sid' '--no-upgrade-test' '--apt' 'ruby-actionpack-3.2=3.2.13-5'
+0m0.0s INFO: Running on: Linux piu-slave-bm-a 3.2.0-4-amd64 #1 SMP Debian 3.2.41-2+deb7u2 x86_64
+0m0.0s DEBUG: Created temporary directory /srv/piuparts.debian.org/tmp/tmpow7rgJ
+0m0.0s DEBUG: Unpacking /srv/piuparts.debian.org/slave/basetgz/sid_amd64.tar.gz into /srv/piuparts.debian.org/tmp/tmpow7rgJ
+0m0.0s DEBUG: Starting command: ['tar', '-C', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', '-zxf', '/srv/piuparts.debian.org/slave/basetgz/sid_amd64.tar.gz']
+0m1.7s DEBUG: Command ok: ['tar', '-C', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', '-zxf', '/srv/piuparts.debian.org/slave/basetgz/sid_amd64.tar.gz']
+0m1.7s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'mount', '-t', 'proc', 'proc', '/proc']
+0m1.7s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'mount', '-t', 'proc', 'proc', '/proc']
+0m1.7s DEBUG: sources.list:
+  deb http://mirror.bm.debian.org/debian/ sid main
+  deb http://mirror.bm.debian.org/debian/ sid contrib
+  deb http://mirror.bm.debian.org/debian/ sid non-free
+0m1.8s DEBUG: Created policy-rc.d and chmodded it.
+0m1.8s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'apt-get', 'update']
+0m8.6s DUMP: 
+  Get:1 http://mirror.bm.debian.org sid InRelease [205 kB]
+  Get:2 http://mirror.bm.debian.org sid/main amd64 Packages [6329 kB]
+  Get:3 http://mirror.bm.debian.org sid/contrib amd64 Packages [48.2 kB]
+  Get:4 http://mirror.bm.debian.org sid/non-free amd64 Packages [85.5 kB]
+  Get:5 http://mirror.bm.debian.org sid/contrib Translation-en [39.3 kB]
+  Get:6 http://mirror.bm.debian.org sid/main Translation-en [4204 kB]
+  Get:7 http://mirror.bm.debian.org sid/non-free Translation-en [72.3 kB]
+  Fetched 11.0 MB in 4s (2197 kB/s)
+  Reading package lists...
+0m8.6s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'apt-get', 'update']
+0m8.6s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'apt-get', '-yf', 'dist-upgrade']
+0m10.0s DUMP: 
+  Reading package lists...
+  Building dependency tree...
+  The following packages will be upgraded:
+    grep libacl1 tzdata
+  3 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+  Need to get 970 kB of archives.
+  After this operation, 276 kB disk space will be freed.
+  Get:1 http://mirror.bm.debian.org/debian/ sid/main grep amd64 2.14-2 [463 kB]
+  Get:2 http://mirror.bm.debian.org/debian/ sid/main libacl1 amd64 2.2.52-1 [30.2 kB]
+  Get:3 http://mirror.bm.debian.org/debian/ sid/main tzdata all 2013c-2 [476 kB]
+  debconf: delaying package configuration, since apt-utils is not installed
+  Fetched 970 kB in 0s (14.9 MB/s)
+  (Reading database ... 6672 files and directories currently installed.)
+  Preparing to replace grep 2.14-1 (using .../archives/grep_2.14-2_amd64.deb) ...
+  Unpacking replacement grep ...
+  Setting up grep (2.14-2) ...
+  (Reading database ... 6672 files and directories currently installed.)
+  Preparing to replace libacl1:amd64 2.2.51-8 (using .../libacl1_2.2.52-1_amd64.deb) ...
+  Unpacking replacement libacl1:amd64 ...
+  Setting up libacl1:amd64 (2.2.52-1) ...
+  Processing triggers for libc-bin ...
+  ldconfig deferred processing now taking place
+  (Reading database ... 6672 files and directories currently installed.)
+  Preparing to replace tzdata 2013b-2 (using .../tzdata_2013c-2_all.deb) ...
+  Unpacking replacement tzdata ...
+  Setting up tzdata (2013c-2) ...
+  
+  Current default time zone: 'Etc/UTC'
+  Local time is now:      Thu May 23 16:04:37 UTC 2013.
+  Universal Time is now:  Thu May 23 16:04:37 UTC 2013.
+  Run 'dpkg-reconfigure tzdata' if you wish to change it.
+0m10.0s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'apt-get', '-yf', 'dist-upgrade']
+0m10.0s DEBUG: Copying scriptsdir /etc/piuparts/scripts to /srv/piuparts.debian.org/tmp/tmpow7rgJ/tmp/scripts/
+0m10.0s DEBUG: Copying scriptsdir /etc/piuparts/scripts-leftovers to /srv/piuparts.debian.org/tmp/tmpow7rgJ/tmp/scripts/
+0m10.0s INFO: Running scripts post_setup
+0m10.0s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'tmp/scripts/post_setup_experimental']
+0m10.0s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'tmp/scripts/post_setup_experimental']
+0m10.0s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'tmp/scripts/post_setup_fake-essential']
+0m11.4s DUMP: 
+  *** Adding fake essential packages ***
+  Reading package lists...
+  Building dependency tree...
+  Reading state information...
+  The following extra packages will be installed:
+    ucf
+  Suggested packages:
+    virtual-mysql-client mysql-client postgresql-client
+  The following NEW packages will be installed:
+    dbconfig-common ucf
+  0 upgraded, 2 newly installed, 0 to remove and 0 not upgraded.
+  Need to get 559 kB of archives.
+  After this operation, 1443 kB of additional disk space will be used.
+  Get:1 http://mirror.bm.debian.org/debian/ sid/main ucf all 3.0027 [71.4 kB]
+  Get:2 http://mirror.bm.debian.org/debian/ sid/main dbconfig-common all 1.8.47+nmu1 [487 kB]
+  debconf: delaying package configuration, since apt-utils is not installed
+  Fetched 559 kB in 0s (25.5 MB/s)
+  Selecting previously unselected package ucf.
+  (Reading database ... 6672 files and directories currently installed.)
+  Unpacking ucf (from .../archives/ucf_3.0027_all.deb) ...
+  Moving old data out of the way
+  Selecting previously unselected package dbconfig-common.
+  Unpacking dbconfig-common (from .../dbconfig-common_1.8.47+nmu1_all.deb) ...
+  Setting up ucf (3.0027) ...
+  Setting up dbconfig-common (1.8.47+nmu1) ...
+  
+  Creating config file /etc/dbconfig-common/config with new version
+0m11.4s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'tmp/scripts/post_setup_fake-essential']
+0m11.4s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'tmp/scripts/post_setup_forbid_home']
+0m11.4s DUMP: 
+  Disabling /home
+0m11.4s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'tmp/scripts/post_setup_forbid_home']
+0m11.4s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'tmp/scripts/post_setup_squeeze-backports']
+0m11.4s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'tmp/scripts/post_setup_squeeze-backports']
+0m11.4s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'apt-get', 'clean']
+0m11.5s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'apt-get', 'clean']
+0m12.0s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'dpkg', '--get-selections', '*']
+0m12.0s DUMP: 
+  apt						install
+  base-files					install
+  base-passwd					install
+  bash						install
+  bsdutils					install
+  coreutils					install
+  dash						install
+  dbconfig-common					install
+  debconf						install
+  debconf-i18n					install
+  debian-archive-keyring				install
+  debianutils					install
+  diffutils					install
+  dpkg						install
+  e2fslibs:amd64					install
+  e2fsprogs					install
+  findutils					install
+  gcc-4.7-base:amd64				install
+  gcc-4.8-base:amd64				install
+  gnupg						install
+  gpgv						install
+  grep						install
+  gzip						install
+  hostname					install
+  initscripts					install
+  insserv						install
+  libacl1:amd64					install
+  libapt-pkg4.12:amd64				install
+  libattr1:amd64					install
+  libblkid1:amd64					install
+  libbz2-1.0:amd64				install
+  libc-bin					install
+  libc6:amd64					install
+  libcap2:amd64					install
+  libcomerr2:amd64				install
+  libdb5.1:amd64					install
+  libgcc1:amd64					install
+  liblocale-gettext-perl				install
+  liblzma5:amd64					install
+  libmount1					install
+  libncurses5:amd64				install
+  libpam-modules:amd64				install
+  libpam-modules-bin				install
+  libpam-runtime					install
+  libpam0g:amd64					install
+  libpcre3:amd64					install
+  libreadline6:amd64				install
+  libselinux1:amd64				install
+  libsemanage-common				install
+  libsemanage1:amd64				install
+  libsepol1:amd64					install
+  libslang2:amd64					install
+  libss2:amd64					install
+  libstdc++6:amd64				install
+  libtext-charwidth-perl				install
+  libtext-iconv-perl				install
+  libtext-wrapi18n-perl				install
+  libtinfo5:amd64					install
+  libusb-0.1-4:amd64				install
+  libustr-1.0-1:amd64				install
+  libuuid1:amd64					install
+  login						install
+  lsb-base					install
+  mawk						install
+  mount						install
+  multiarch-support				install
+  ncurses-base					install
+  ncurses-bin					install
+  passwd						install
+  perl-base					install
+  readline-common					install
+  sed						install
+  sensible-utils					install
+  sysv-rc						install
+  sysvinit					install
+  sysvinit-utils					install
+  tar						install
+  tzdata						install
+  ucf						install
+  util-linux					install
+  xz-utils					install
+  zlib1g:amd64					install
+0m12.0s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'dpkg', '--get-selections', '*']
+0m12.0s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'dpkg-divert', '--list']
+0m12.0s DUMP: 
+  diversion of /usr/share/man/man1/sh.1.gz to /usr/share/man/man1/sh.distrib.1.gz by dash
+  diversion of /bin/sh to /bin/sh.distrib by dash
+0m12.0s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'dpkg-divert', '--list']
+0m12.0s INFO: apt-cache does not know about any of the requested packages
+0m12.0s INFO: Running scripts pre_test
+0m12.0s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'tmp/scripts/pre_test_root_password']
+0m12.1s DUMP: 
+  Enter new UNIX password: Retype new UNIX password: passwd: password updated successfully
+0m12.1s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'tmp/scripts/pre_test_root_password']
+0m12.1s INFO: Running scripts pre_install
+0m12.1s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'tmp/scripts/pre_install_exceptions']
+0m12.1s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'tmp/scripts/pre_install_exceptions']
+0m12.1s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'tmp/scripts/pre_install_foreign_architecture_i386']
+0m12.1s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'tmp/scripts/pre_install_foreign_architecture_i386']
+0m12.1s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'apt-cache', 'show', 'ruby-actionpack-3.2']
+0m13.8s DUMP: 
+  Package: ruby-actionpack-3.2
+  Version: 3.2.13-5
+  Installed-Size: 1243
+  Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+  Architecture: all
+  Depends: ruby | ruby-interpreter, ruby-activesupport-3.2 (>= 3.2.13), ruby-activemodel-3.2 (>= 3.2.13), ruby-activerecord-3.2 (>= 3.2.13), ruby-rack-cache (>= 1.2~), ruby-rack (>= 1.3.0~), ruby-rack-test (>= 0.6.1~), ruby-journey (>= 1.0.1~), ruby-sprockets (>= 2.1.2~), ruby-builder (>= 3.0.0), ruby-erubis (>= 2.7.0~), ruby-tzinfo (>= 0.3.29~)
+  Conflicts: ruby-actionpack-2.3
+  Description-en: web-flow and rendering framework putting the VC in MVC (part of Rails)
+   Action Pack is a framework for web apps on Rails. Simple,
+   battle-tested conventions for building and testing MVC web
+   applications. Works with any Rack-compatible server.
+  Homepage: http://www.rubyonrails.org
+  Description-md5: 0ffc66c8a0daccc94cccb64a6cf97110
+  Ruby-Versions: ruby1.8 ruby1.9.1
+  Section: ruby
+  Priority: optional
+  Filename: pool/main/r/ruby-actionpack-3.2/ruby-actionpack-3.2_3.2.13-5_all.deb
+  Size: 295750
+  MD5sum: 2ce64249c2fb2d28ebe4e46f651dd5e2
+  SHA1: 313495f92d7085d0f4496a3925a101fd0e4add55
+  SHA256: 7bf41566dedb151f542572463357da7cbb5b873637f26a58f0140835a05d7f09
+0m13.8s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'apt-cache', 'show', 'ruby-actionpack-3.2']
+0m13.8s DEBUG: Starting command: ['dpkg-deb', '-b', '--nocheck', '/srv/piuparts.debian.org/tmp/tmpeuJl6t/piuparts-depends-dummy']
+0m13.8s DUMP: 
+  dpkg-deb: warning: not checking contents of control area
+  dpkg-deb: building an unknown package in '/srv/piuparts.debian.org/tmp/tmpeuJl6t/piuparts-depends-dummy.deb'.
+0m13.8s DEBUG: Command ok: ['dpkg-deb', '-b', '--nocheck', '/srv/piuparts.debian.org/tmp/tmpeuJl6t/piuparts-depends-dummy']
+0m13.8s DEBUG: Copying /srv/piuparts.debian.org/tmp/tmpeuJl6t/piuparts-depends-dummy.deb to /srv/piuparts.debian.org/tmp/tmpow7rgJ/tmp
+0m13.8s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'dpkg', '-i', 'tmp/piuparts-depends-dummy.deb']
+0m13.9s DUMP: 
+  Selecting previously unselected package piuparts-depends-dummy.
+  (Reading database ... 6926 files and directories currently installed.)
+  Unpacking piuparts-depends-dummy (from tmp/piuparts-depends-dummy.deb) ...
+  dpkg: dependency problems prevent configuration of piuparts-depends-dummy:
+   piuparts-depends-dummy depends on ruby | ruby-interpreter; however:
+    Package ruby is not installed.
+    Package ruby-interpreter is not installed.
+   piuparts-depends-dummy depends on ruby-activesupport-3.2 (>= 3.2.13); however:
+    Package ruby-activesupport-3.2 is not installed.
+   piuparts-depends-dummy depends on ruby-activemodel-3.2 (>= 3.2.13); however:
+    Package ruby-activemodel-3.2 is not installed.
+   piuparts-depends-dummy depends on ruby-activerecord-3.2 (>= 3.2.13); however:
+    Package ruby-activerecord-3.2 is not installed.
+   piuparts-depends-dummy depends on ruby-rack-cache (>= 1.2~); however:
+    Package ruby-rack-cache is not installed.
+   piuparts-depends-dummy depends on ruby-rack (>= 1.3.0~); however:
+    Package ruby-rack is not installed.
+   piuparts-depends-dummy depends on ruby-rack-test (>= 0.6.1~); however:
+    Package ruby-rack-test is not installed.
+   piuparts-depends-dummy depends on ruby-journey (>= 1.0.1~); however:
+    Package ruby-
+  dpkg: error processing piuparts-depends-dummy (--install):
+   dependency problems - leaving unconfigured
+  Errors were encountered while processing:
+   piuparts-depends-dummy
+0m13.9s DEBUG: Command failed (status=1), but ignoring error: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'dpkg', '-i', 'tmp/piuparts-depends-dummy.deb']
+0m13.9s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'apt-get', '-yf', 'install']
+0m15.0s DUMP: 
+  Reading package lists...
+  Building dependency tree...
+  Reading state information...
+  Correcting dependencies... Done
+  The following packages will be REMOVED:
+    piuparts-depends-dummy
+  0 upgraded, 0 newly installed, 1 to remove and 0 not upgraded.
+  1 not fully installed or removed.
+  After this operation, 0 B of additional disk space will be used.
+  (Reading database ... 6926 files and directories currently installed.)
+  Removing piuparts-depends-dummy ...
+0m15.0s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'apt-get', '-yf', 'install']
+0m15.0s INFO: Installation of ['tmp/piuparts-depends-dummy.deb'] ok
+0m15.0s DEBUG: Removing /srv/piuparts.debian.org/tmp/tmpow7rgJ/tmp/piuparts-depends-dummy.deb
+0m15.0s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'dpkg', '--purge', 'piuparts-depends-dummy']
+0m15.0s DUMP: 
+  dpkg: warning: ignoring request to remove piuparts-depends-dummy which isn't installed
+0m15.0s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'dpkg', '--purge', 'piuparts-depends-dummy']
+0m15.0s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'apt-get', 'clean']
+0m15.0s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'apt-get', 'clean']
+0m15.5s DEBUG: Starting command: ['lsof', '-w', '+D', '/srv/piuparts.debian.org/tmp/tmpow7rgJ']
+0m15.9s DEBUG: Command failed (status=1), but ignoring error: ['lsof', '-w', '+D', '/srv/piuparts.debian.org/tmp/tmpow7rgJ']
+0m16.8s DEBUG: No broken symlinks as far as we can find.
+0m16.8s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'apt-cache', 'policy']
+0m18.6s DUMP: 
+  Package files:
+   100 /var/lib/dpkg/status
+       release a=now
+   500 http://mirror.bm.debian.org/debian/ sid/non-free Translation-en
+   500 http://mirror.bm.debian.org/debian/ sid/main Translation-en
+   500 http://mirror.bm.debian.org/debian/ sid/contrib Translation-en
+   500 http://mirror.bm.debian.org/debian/ sid/non-free amd64 Packages
+       release o=Debian,a=unstable,n=sid,l=Debian,c=non-free
+       origin mirror.bm.debian.org
+   500 http://mirror.bm.debian.org/debian/ sid/contrib amd64 Packages
+       release o=Debian,a=unstable,n=sid,l=Debian,c=contrib
+       origin mirror.bm.debian.org
+   500 http://mirror.bm.debian.org/debian/ sid/main amd64 Packages
+       release o=Debian,a=unstable,n=sid,l=Debian,c=main
+       origin mirror.bm.debian.org
+  Pinned packages:
+0m18.6s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'apt-cache', 'policy']
+0m18.6s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'apt-cache', 'policy', 'ruby-actionpack-3.2']
+0m18.7s DUMP: 
+  ruby-actionpack-3.2:
+    Installed: (none)
+    Candidate: 3.2.13-5
+    Version table:
+       3.2.13-5 0
+          500 http://mirror.bm.debian.org/debian/ sid/main amd64 Packages
+0m18.7s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'apt-cache', 'policy', 'ruby-actionpack-3.2']
+0m18.7s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'apt-get', '-y', 'install', 'ruby-actionpack-3.2=3.2.13-5']
+0m19.2s DUMP: 
+  Reading package lists...
+  Building dependency tree...
+  Reading state information...
+  Some packages could not be installed. This may mean that you have
+  requested an impossible situation or if you are using the unstable
+  distribution that some required packages have not yet been created
+  or been moved out of Incoming.
+  The following information may help to resolve the situation:
+  
+  The following packages have unmet dependencies:
+   ruby-actionpack-3.2 : Depends: ruby-activerecord-3.2 (>= 3.2.13) but it is not going to be installed
+  E: Unable to correct problems, you have held broken packages.
+0m19.2s ERROR: Command failed (status=100): ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'apt-get', '-y', 'install', 'ruby-actionpack-3.2=3.2.13-5']
+  Reading package lists...
+  Building dependency tree...
+  Reading state information...
+  Some packages could not be installed. This may mean that you have
+  requested an impossible situation or if you are using the unstable
+  distribution that some required packages have not yet been created
+  or been moved out of Incoming.
+  The following information may help to resolve the situation:
+  
+  The following packages have unmet dependencies:
+   ruby-actionpack-3.2 : Depends: ruby-activerecord-3.2 (>= 3.2.13) but it is not going to be installed
+  E: Unable to correct problems, you have held broken packages.
+  
+0m19.5s DEBUG: Starting command: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'umount', '/proc']
+0m19.5s DEBUG: Command ok: ['chroot', '/srv/piuparts.debian.org/tmp/tmpow7rgJ', 'umount', '/proc']
+0m19.5s DEBUG: Starting command: ['rm', '-rf', '--one-file-system', '/srv/piuparts.debian.org/tmp/tmpow7rgJ']
+0m19.6s DEBUG: Command ok: ['rm', '-rf', '--one-file-system', '/srv/piuparts.debian.org/tmp/tmpow7rgJ']
+0m19.6s DEBUG: Removed directory tree at /srv/piuparts.debian.org/tmp/tmpow7rgJ
+0m19.6s ERROR: piuparts run ends.
