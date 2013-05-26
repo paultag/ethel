@@ -6,7 +6,8 @@ import re
 
 
 LINE_EXPR = re.compile(
-    r"(?P<file>.*):(?P<line>.*):(?P<column>.*) (?P<severity>.*)    (?P<testid>.*)    (?P<message>.*)"
+    r"(?P<file>.*):(?P<line>.*):(?P<column>.*) (?P<severity>.*)    "
+    "(?P<testid>.*)    (?P<message>.*)"
 )
 
 
