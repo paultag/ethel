@@ -70,8 +70,6 @@ def sbuild(package, dist, chroot):
         "sbuild",
         "-c", chroot,
         "-v",
-        "--source",
-        "-A",
         "-d", dist,
         "-j", "8",
         package,

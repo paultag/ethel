@@ -24,6 +24,10 @@ def get_proxy():
 def build_next():
     proxy = get_proxy()
     job = proxy.get_next_job('amd64')
+
+    if job is None:
+        raise Exception("Nice. All done.")
+
     url = proxy.get_dsc_url(job['package'])
     info = proxy.get_source(job['package'])
     dsc = "{source}_{version}.dsc".format(**info)
