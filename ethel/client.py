@@ -23,7 +23,8 @@ def get_proxy():
 
 def build_next():
     proxy = get_proxy()
-    job = proxy.get_next_job('amd64')
+
+    job = proxy.get_next_job('unstable-amd64')
 
     if job is None:
         raise Exception("Nice. All done.")
