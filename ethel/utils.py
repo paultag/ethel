@@ -2,6 +2,7 @@ from ethel.error import EthelError
 
 from contextlib import contextmanager
 from debian import deb822
+import configparser
 import subprocess
 import tempfile
 import shutil
@@ -69,3 +70,25 @@ def jobize(path, job):
     obj['X-Lucy-Job'] = job
     obj.dump(fd=open(path, 'wb'))
     return obj
+
+
+def prepare_binary_for_upload(changes, job, obj):
+    jobize(changes, job)
+    gpg = obj['gpg']
+    out, err, ret = run_command(['debsign', '-k%s' % (gpg), changes])
+    if ret != 0:
+        raise Exception("bad debsign")
+
+
+def upload(changes, job):
+    cfg = configparser.ConfigParser()
+    if cfg.read("/etc/ethel.ini") == []:
+        raise Exception("WTF no ethel")
+    obj = cfg['host']
+
+    prepare_binary_for_upload(changes, job, obj)
+
+    out, err, ret = run_command(['dput', obj['dput-host'], changes])
+    if ret != 0:
+        print(err)
+        raise Exception("dput sux")
