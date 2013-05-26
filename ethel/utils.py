@@ -1,6 +1,7 @@
 from ethel.error import EthelError
 
 from contextlib import contextmanager
+from debian import deb822
 import subprocess
 import tempfile
 import shutil
@@ -60,3 +61,11 @@ class EthelSubprocessError(EthelError):
         self.err = err
         self.ret = ret
         self.cmd = cmd
+
+
+def jobize(path, job):
+    f = open(path, 'r')
+    obj = deb822.Deb822(f)
+    obj['X-Lucy-Job'] = job
+    obj.dump(fd=open(path, 'wb'))
+    return obj
