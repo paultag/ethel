@@ -7,6 +7,7 @@ import subprocess
 import tempfile
 import shutil
 import shlex
+import os
 
 
 @contextmanager
@@ -16,6 +17,15 @@ def tdir():
         yield fp
     finally:
         shutil.rmtree(fp)
+
+
+@contextmanager
+def cd(where):
+    ncwd = os.getcwd()
+    try:
+        yield os.chdir(where)
+    finally:
+        os.chdir(ncwd)
 
 
 def run_command(command, stdin=None):
