@@ -52,7 +52,9 @@ def parse_sbuild_log(log, sut):
     return obj
 
 
-def sbuild(package, dist, chroot):
+def sbuild(package, dist, arch):
+    chroot = "%s-%s" % (dist, arch)
+
     dsc = os.path.basename(package)
     if not dsc.endswith('.dsc'):
         raise ValueError("WTF")

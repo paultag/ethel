@@ -1,9 +1,7 @@
-from ethel.utils import tdir, cd, dget, upload
+from ethel.utils import tdir, cd, dget, upload, run_command
 from ethel.config import load
-from ethel.commands.sbuild import sbuild
 
-# from storz.decompress import digest_firehose_tree
-# from firehose.model import Analysis
+from contextlib import contextmanager
 import xmlrpc.client
 import time
 import glob
@@ -21,34 +19,27 @@ def get_proxy():
     return proxy
 
 
-def build_next():
+@contextmanager
+def checkout(package):
     proxy = get_proxy()
+    _type = package['_type']
+    if _type not in ['binaries', 'sources']:
+        raise ValueError("_type sucks")
 
-    job = proxy.get_next_job('unstable-amd64')
+    def source():
+        dsc = "{source}_{version}.dsc".format(**package)
+        url = proxy.get_dsc_url(package['_id'])
+        dget(url)
+        yield dsc
 
-    if job is None:
-        raise Exception("Nice. All done.")
+    def binary():
+        url_base = proxy.get_binary_base_url(package['_id'])
+        out, err, ret = run_command(['wget'] + [
+            os.path.join(url_base, x) for x in package['binaries']])
+        if ret != 0:
+            raise Exception("zomgwtf")
+        yield package['binaries']
 
-    url = proxy.get_dsc_url(job['package'])
-    info = proxy.get_source(job['package'])
-    dsc = "{source}_{version}.dsc".format(**info)
-    # fluxbox_1.3.5-1_amd64.changes
-    build = "{source}_{version}_{arch}.changes".format(source=info['source'],
-                                                       version=info['version'],
-                                                       arch='amd64')
     with tdir() as where:
         with cd(where):
-            dget(url)
-            ftbfs, out, info = sbuild(dsc, 'unstable', 'unstable-amd64')
-            upload(build, job['_id'])
-            proxy.close_job(job['_id'])
-
-
-def buildd():
-    while True:
-        try:
-            print("next build.")
-            build_next()
-        except Exception as e:
-            print("Fallthrough. %s" % (e))
-            time.sleep(10)
+            yield {"source": source, "binary": binary}[_type]()
