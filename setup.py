@@ -20,7 +20,7 @@ setup(
     platforms=['any'],
     entry_points = {
         'console_scripts': [
-            'ethel-buildd = ethel.client:buildd',
+#            'ethel-buildd = ethel.client:buildd',
 #            'ethel-next = ethel.cli:next',
 #            'etheld = ethel.daemon:daemon',
 #            'ethel-close = ethel.cli:close',

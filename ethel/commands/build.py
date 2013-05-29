@@ -1,4 +1,5 @@
 from ethel.runners.sbuild import sbuild
+from ethel.utils import upload
 
 
 def run(dsc, package, job):
