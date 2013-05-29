@@ -37,6 +37,11 @@ def iterate():
     with tdir() as fd:
         with cd(fd):
             with checkout(package) as target:
-                handler(target, package, job)
+                info, log, err = handler(target, package, job)
+
+                type_ = {"sources": "source",
+                         "binaries": "binary"}[package['_type']]
+
+                proxy.submit_report(info, log, job['_id'], err)
 
 iterate()

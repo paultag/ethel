@@ -100,5 +100,5 @@ def upload(changes, job):
 
     out, err, ret = run_command(['dput', obj['dput-host'], changes])
     if ret != 0:
-        print(err)
+        print(out)
         raise Exception("dput sux")

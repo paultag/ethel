@@ -13,3 +13,4 @@ def run(dsc, package, job):
         version=package['version'],
         arch=arch)
     upload(changes, job['_id'])
+    return (info, out, ftbfs)
