@@ -12,4 +12,4 @@ def run(dsc, package, job):
         source=package['source'],
         version=package['version'],
         arch=arch)
-    upload(changes, job)
+    upload(changes, job['_id'])
