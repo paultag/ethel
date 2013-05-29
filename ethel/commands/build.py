@@ -8,5 +8,8 @@ def run(dsc, package, job):
     ftbfs, out, info = sbuild(dsc, suite, arch)
     print(ftbfs, info)
     # fluxbox_1.3.5-1_amd64.changes
-    changes = "{package}_{version}_{arch}.changes"
+    changes = "{source}_{version}_{arch}.changes".format(
+        source=package['source'],
+        version=package['version'],
+        arch=arch)
     upload(changes, job)
