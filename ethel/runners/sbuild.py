@@ -81,7 +81,3 @@ def sbuild(package, dist, arch):
     info = parse_sbuild_log(out, sut=sut)
 
     return ftbfs, out, info
-
-
-def main():
-    sbuild(*sys.argv[1:])
