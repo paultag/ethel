@@ -36,8 +36,7 @@ def iterate():
     handler = load_module(job['type'])
     with tdir() as fd:
         with cd(fd):
-            checkout(package)
-            handler(package, job)
-
+            with checkout(package) as target:
+                handler(target, package, job)
 
 iterate()

@@ -28,7 +28,7 @@ def checkout(package):
 
     def source():
         dsc = "{source}_{version}.dsc".format(**package)
-        url = proxy.get_dsc_url(package['_id'])
+        url = proxy.get_dsc(package['_id'])
         dget(url)
         yield dsc
 
@@ -42,4 +42,5 @@ def checkout(package):
 
     with tdir() as where:
         with cd(where):
-            yield {"source": source, "binary": binary}[_type]()
+            for x in {"sources": source, "binaries": binary}[_type]():
+                yield x
