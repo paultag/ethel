@@ -87,6 +87,8 @@ def prepare_binary_for_upload(changes, job, obj):
     gpg = obj['gpg']
     out, err, ret = run_command(['debsign', '-k%s' % (gpg), changes])
     if ret != 0:
+        print(out)
+        print(err)
         raise Exception("bad debsign")
 
 
@@ -101,4 +103,5 @@ def upload(changes, job):
     out, err, ret = run_command(['dput', obj['dput-host'], changes])
     if ret != 0:
         print(out)
+        print(err)
         raise Exception("dput sux")
