@@ -1,7 +1,8 @@
 from ethel.commands import PLUGINS, load_module
 from ethel.client import get_proxy, checkout
-from ethel.config import load
+from contextlib import contextmanager
 from ethel.utils import tdir, cd
+from ethel.config import load
 
 config = load()
 proxy = get_proxy()
@@ -16,32 +17,52 @@ def listize(entry):
     return [None if x == "null" else x for x in items]
 
 
+@contextmanager
+def workon(suites, arches, things):
+    job = proxy.get_next_job(suites, arches, things)
+    if job is None:
+        yield
+    else:
+        print("[ethel] aquired job %s (%s) for %s/%s" % (
+            job['_id'], job['type'], job['suite'], job['arch']))
+
+        try:
+            yield job
+        except:
+            proxy.forfeit_job(job['_id'])
+            raise
+        else:
+            proxy.close_job(job['_id'])
+
+
+
 def iterate():
     suites = listize(config['suites'])
     arches = listize(config['arches'])
-    job = proxy.get_next_job(suites, arches, list(PLUGINS.keys()))
-    if job is None:
-        raise IDidNothingError("No more jobs")
-    package_id = job['package']
-    type_ = job['package_type']
+    with workon(suites, arches, list(PLUGINS.keys())) as job:
+        if job is None:
+            raise IDidNothingError("No more jobs")
 
-    package = None
-    if type_ == 'binary':
-        package = proxy.get_binary_package(package_id)
-    elif type_ == 'source':
-        package = proxy.get_source_package(package_id)
-    else:
-        raise IDidNothingError("SHIT")
+        package_id = job['package']
+        type_ = job['package_type']
 
-    handler = load_module(job['type'])
-    with tdir() as fd:
-        with cd(fd):
-            with checkout(package) as target:
-                info, log, err = handler(target, package, job)
+        package = None
+        if type_ == 'binary':
+            package = proxy.get_binary_package(package_id)
+        elif type_ == 'source':
+            package = proxy.get_source_package(package_id)
+        else:
+            raise IDidNothingError("SHIT")
 
-                type_ = {"sources": "source",
-                         "binaries": "binary"}[package['_type']]
+        handler = load_module(job['type'])
+        with tdir() as fd:
+            with cd(fd):
+                with checkout(package) as target:
+                    info, log, err = handler(target, package, job)
 
-                proxy.submit_report(info, log, job['_id'], err)
+                    type_ = {"sources": "source",
+                             "binaries": "binary"}[package['_type']]
+
+                    proxy.submit_report(info, log, job['_id'], err)
 
 iterate()

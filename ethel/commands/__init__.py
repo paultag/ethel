@@ -1,7 +1,9 @@
 import importlib
 
+
 PLUGINS = {
-    "build": "ethel.commands.build"
+    "build": "ethel.commands.build",
+    "adequate": "ethel.commands.adequate",
 }
 
 

@@ -5,6 +5,7 @@ from contextlib import contextmanager
 import xmlrpc.client
 import time
 import glob
+import os
 
 
 def get_proxy():
@@ -33,9 +34,10 @@ def checkout(package):
         yield dsc
 
     def binary():
-        url_base = proxy.get_binary_base_url(package['_id'])
+        info = proxy.get_deb_info(package['_id'])
+        url_base = info['root']
         out, err, ret = run_command(['wget'] + [
-            os.path.join(url_base, x) for x in package['binaries']])
+            os.path.join(url_base, x) for x in info['packages']])
         if ret != 0:
             raise Exception("zomgwtf")
         yield package['binaries']

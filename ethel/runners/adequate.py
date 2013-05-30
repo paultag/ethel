@@ -7,7 +7,7 @@ from storz.wrapper import generate_analysis
 import os
 
 
-def adequate(chroot, package):  # make it package*s*
+def adequate(chroot, packages, job):  # make it package*s*
     analysis = generate_analysis("adequate", "unstable", package)
 
     with schroot(chroot) as session:
@@ -37,10 +37,3 @@ def adequate(chroot, package):  # make it package*s*
             analysis.results.append(issue)
 
         return failed, out, analysis
-
-
-def main():
-    import sys
-    output = open(sys.argv[3], 'wb')
-    failed, out, analysis = adequate(sys.argv[1], sys.argv[2])
-    output.write(analysis.to_xml_bytes())
