@@ -1,11 +1,13 @@
+from firehose.model import (Analysis, Generator, Metadata,
+                            DebianBinary, DebianSource)
+
 from ethel.commands import PLUGINS, load_module
 from ethel.client import get_proxy, checkout
 from contextlib import contextmanager
 from ethel.utils import tdir, cd
 from ethel.config import load
 
-from firehose.model import (Analysis, Generator, Metadata,
-                            DebianBinary, DebianSource)
+import time
 
 config = load()
 proxy = get_proxy()
@@ -102,4 +104,9 @@ def iterate():
                     print("[ethel] - filing report")
                     proxy.submit_report(firehose, log, job['_id'], err)
 
-iterate()
+def main():
+    while True:
+        try:
+            iterate()
+        except IDidNothingError:
+            time.sleep(10)
