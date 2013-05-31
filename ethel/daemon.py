@@ -109,4 +109,5 @@ def main():
         try:
             iterate()
         except IDidNothingError:
+            print("[ethel] nothing to do.")
             time.sleep(10)
