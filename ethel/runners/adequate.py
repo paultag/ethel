@@ -10,25 +10,25 @@ def adequate(chroot_name, packages, analysis):
         for deb in packages:
             chroot.copy(deb, "/tmp")
 
-        ret, out, err = chroot.run([
+        out, err, ret = chroot.run([
             'apt-get', 'install', '-y', 'adequate'
         ], user='root')
 
-        ret, out, err = chroot.run([
+        out, err, ret = chroot.run([
             'dpkg', '-i'
         ] + [
             "/tmp/%s" % (x) for x in packages
         ], user='root', return_codes=(0, 1))
 
-        ret, out, err = chroot.run([
+        out, err, ret = chroot.run([
             'apt-get', 'install', '-y', '-f'
         ], user='root')
 
-        ret, out, err = chroot.run(['adequate', deb.split("_", 1)[0]])
+        out, err, ret = chroot.run(['adequate', deb.split("_", 1)[0]])
 
         failed = False
         for issue in parse_adequate(out.splitlines()):
             failed = True
             analysis.results.append(issue)
 
-        return analysis, failed, out
+        return analysis, out, failed

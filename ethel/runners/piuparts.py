@@ -34,14 +34,14 @@ def piuparts(chroot, packages, analysis):
         for package in packages:
             chroot.copy(package, "/tmp")
 
-        print("Installing...")
+        print("[     ] Installing...")
         chroot.run(['apt-get', 'install', '-y', 'piuparts'], user='root')
-        print("Piuparts installed.")
+        print("[     ] Piuparts installed.")
 
         failed = False
         try:
-            print("Running Piuparts..")
-            ret, out, err = chroot.run([
+            print("[     ] Running Piuparts..")
+            out, err, ret = chroot.run([
                 'piuparts',
                     '-b', copy_location,
             ] + [ "/tmp/%s" % (x) for x in packages ] + [
@@ -55,4 +55,4 @@ def piuparts(chroot, packages, analysis):
         for x in parse_piuparts(out.splitlines(), package):
             analysis.results.append(x)
 
-        return out, analysis, failed
+        return analysis, out, failed
