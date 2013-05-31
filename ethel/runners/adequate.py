@@ -1,39 +1,34 @@
-from ethel.chroot import schroot, copy, scmd
 from ethel.wrappers.adequate import parse_adequate
-
 from firehose.model import Issue, Message, File, Location
-from storz.wrapper import generate_analysis
+from schroot import schroot
 
 import os
 
 
-def adequate(chroot, packages, job):  # make it package*s*
-    analysis = generate_analysis("adequate", "unstable", package)
+def adequate(chroot_name, packages, analysis):
+    with schroot(chroot_name) as chroot:
+        for deb in packages:
+            chroot.copy(deb, "/tmp")
 
-    with schroot(chroot) as session:
-        deb = os.path.basename(package)
-        if not deb.endswith('.deb'):
-            raise ValueError("Stop with the crack smoking")
-
-        where = '/tmp/%s' % (deb)
-        copy(session, package, where)
-
-        out, err = scmd(session, [
+        ret, out, err = chroot.run([
             'apt-get', 'install', '-y', 'adequate'
         ], user='root')
 
-        out, err = scmd(session, [
-            'dpkg', '-i', where
-        ], user='root', expected=(0, 1))
+        ret, out, err = chroot.run([
+            'dpkg', '-i'
+        ] + [
+            "/tmp/%s" % (x) for x in packages
+        ], user='root', return_codes=(0, 1))
 
-        out, err = scmd(session, [
+        ret, out, err = chroot.run([
             'apt-get', 'install', '-y', '-f'
         ], user='root')
 
-        out, err = scmd(session, ['adequate', deb.split("_", 1)[0]])
+        ret, out, err = chroot.run(['adequate', deb.split("_", 1)[0]])
+
         failed = False
         for issue in parse_adequate(out.splitlines()):
             failed = True
             analysis.results.append(issue)
 
-        return failed, out, analysis
+        return failed, out

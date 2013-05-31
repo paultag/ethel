@@ -4,6 +4,9 @@ from contextlib import contextmanager
 from ethel.utils import tdir, cd
 from ethel.config import load
 
+from firehose.model import (Analysis, Generator, Metadata,
+                            DebianBinary, DebianSource)
+
 config = load()
 proxy = get_proxy()
 
@@ -35,6 +38,36 @@ def workon(suites, arches, things):
             proxy.close_job(job['_id'])
 
 
+def generate_sut_from_source(package):
+    name = package['source']
+    local = None
+    version = package['version']
+    if "-" in version:
+        version, local = version.rsplit("-", 1)
+    return DebianSource(name, version, local)
+
+
+def generate_sut_from_binary(package):
+    source = proxy.get_source_package(package['source'])
+    arch = package['arch']
+    name = source['source']
+    local = None
+    version = source['version']
+    if "-" in version:
+        version, local = version.rsplit("-", 1)
+    return DebianBinary(name, version, local, arch)
+
+
+def create_firehose(package):
+    sut = {
+        "sources": generate_sut_from_source,
+        "binaries": generate_sut_from_binary
+    }[package['_type']](package)
+
+    return Analysis(metadata=Metadata(
+        generator=Generator(name="ethel", version="fixme"),
+        sut=sut, file_=None, stats=None), results=[])
+
 
 def iterate():
     suites = listize(config['suites'])
@@ -55,14 +88,16 @@ def iterate():
             raise IDidNothingError("SHIT")
 
         handler = load_module(job['type'])
+        firehose = create_firehose(package)
+
         with tdir() as fd:
             with cd(fd):
                 with checkout(package) as target:
-                    info, log, err = handler(target, package, job)
+                    log, err = handler(target, package, firehose)
 
                     type_ = {"sources": "source",
                              "binaries": "binary"}[package['_type']]
 
-                    proxy.submit_report(info, log, job['_id'], err)
+                    proxy.submit_report(firehose, log, job['_id'], err)
 
 iterate()

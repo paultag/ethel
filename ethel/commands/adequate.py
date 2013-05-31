@@ -1,11 +1,9 @@
+from ethel.runners.adequate import adequate
 
 
-def run(debs, package, job):
-    print(debs)
+def run(debs, package, firehose):
+    if any((not x.endswith(".deb") for x in debs)):
+        raise Exception("Non-deb given")
 
-    info = None
-    log = ""
-    err = 0
-
-    raise Exception
-    return info, log, err
+    chroot_name = "{suite}-{arch}".format(**package)
+    return adequate(chroot_name, debs, firehose)
