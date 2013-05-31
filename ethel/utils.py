@@ -44,6 +44,7 @@ def run_command(command, stdin=None):
         kwargs['input'] = stdin.read()
 
     (output, stderr) = pipe.communicate(**kwargs)
+    output, stderr = (c.decode('utf-8') for c in (output, stderr))
     return (output, stderr, pipe.returncode)
 
 
@@ -52,7 +53,6 @@ def safe_run(cmd, expected=0):
         expected = (expected, )
 
     out, err, ret = run_command(cmd)
-    out, err = (x.decode('utf-8') for x in (out, err))
 
     if not ret in expected:
         e = EthelSubprocessError(out, err, ret, cmd)

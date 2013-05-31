@@ -102,12 +102,13 @@ def iterate():
                              "binaries": "binary"}[package['_type']]
 
                     print("[ethel] - filing report")
-                    proxy.submit_report(firehose, log, job['_id'], err)
+                    proxy.submit_report(firehose.to_json(),
+                                        log, job['_id'], err)
 
 def main():
     while True:
         try:
             iterate()
         except IDidNothingError:
-            print("[ethel] nothing to do.")
-            time.sleep(10)
+            #print("[ethel] nothing to do.")
+            time.sleep(30)

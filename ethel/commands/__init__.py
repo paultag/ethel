@@ -3,8 +3,13 @@ import importlib
 
 PLUGINS = {
     "build": "ethel.commands.build",
+
+    "lintian": "ethel.commands.lintian",
+    "lintian4py": "ethel.commands.lintian4py",
+
     "adequate": "ethel.commands.adequate",
     "piuparts": "ethel.commands.piuparts",
+    "desktop-file-validate": "ethel.commands.desktop_file_validate",
 }
 
 

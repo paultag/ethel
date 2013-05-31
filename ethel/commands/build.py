@@ -1,5 +1,6 @@
 from ethel.runners.sbuild import sbuild
 from ethel.utils import upload
+import os
 
 
 # target package firehose
@@ -14,5 +15,10 @@ def run(dsc, package, job, firehose):
         version=package['version'],
         arch=arch)
 
-    upload(changes, job['_id'])
+    if os.path.exists(changes):
+        upload(changes, job['_id'])
+    elif not ftbfs:
+        print(out)
+        raise Exception("Um. No changes but no FTBFS.")
+
     return (info, out, ftbfs)

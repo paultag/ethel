@@ -69,6 +69,7 @@ def sbuild(package, dist, arch):
 
     out, err, ret = run_command([
         "sbuild",
+        "-A",
         "-c", chroot,
         "-v",
         "-d", dist,
@@ -76,7 +77,6 @@ def sbuild(package, dist, arch):
         package,
     ])
     ftbfs = ret != 0
-    out, err = out.decode('utf-8'), err.decode('utf-8')
     info = parse_sbuild_log(out, sut=sut)
 
     return info, out, ftbfs
