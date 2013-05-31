@@ -1,9 +1,11 @@
-from ethel.chroot import schroot, copy, scmd, get_tarball
 from ethel.utils import EthelSubprocessError
 from ethel.wrappers.piuparts import parse_piuparts
-
 from firehose.model import Issue, Message, File, Location
-from storz.wrapper import generate_analysis
+
+from schroot.chroot import SchrootCommandError
+from schroot import schroot
+
+import configparser
 
 import sys
 import os
@@ -14,49 +16,43 @@ LINE_INFO = re.compile(
     r"(?P<minutes>\d+)m(?P<sec>(\d(\.?))+)s (?P<severity>\w+): (?P<info>.*)")
 
 
-def piuparts(chroot, package):  # packages
-    analysis = generate_analysis("piuparts", "unstable", package)
-    tarball = get_tarball(chroot)
+def piuparts(chroot, packages, analysis):
+    cfg = configparser.ConfigParser()
+    if cfg.read("/etc/schroot/chroot.d/%s" % (chroot)) == []:
+        raise Exception("Shit. No such tarball")
 
-    name = os.path.basename(tarball)
-    internal_path = "/tmp/%s" % (name)
+    block = cfg[chroot]
 
-    package_name = os.path.basename(package)
-    internal_package = "/tmp/%s" % (package_name)
+    if "file" not in block:
+        raise Exception("Chroot type isn't of tarball")
 
-    with schroot(chroot) as session:
+    location = block['file']
+    copy_location = os.path.join("/tmp", os.path.basename(location))
 
-        copy(session, tarball, internal_path)
-        copy(session, package, internal_package)
+    with schroot(chroot) as chroot:
+        chroot.copy(location, copy_location)
+        for package in packages:
+            chroot.copy(package, "/tmp")
 
         print("Installing...")
-        scmd(session, [
-            'apt-get', 'install', '-y', 'piuparts'
-        ], user='root')
-
+        chroot.run(['apt-get', 'install', '-y', 'piuparts'], user='root')
         print("Piuparts installed.")
 
         failed = False
         try:
             print("Running Piuparts..")
-            out, err = scmd(session, [
+            ret, out, err = chroot.run([
                 'piuparts',
-                    '-b', internal_path,
-                    internal_package,
+                    '-b', copy_location,
+            ] + [ "/tmp/%s" % (x) for x in packages ] + [
                     '--warn-on-debsums-errors',
                     '--pedantic-purge-test',
             ], user='root')
-        except EthelSubprocessError as e:
+        except SchrootCommandError as e:
             out, err = e.out, e.err
             failed = True
 
         for x in parse_piuparts(out.splitlines(), package):
             analysis.results.append(x)
 
-        return failed, out, analysis
-
-
-def main():
-    output = open(sys.argv[3], 'wb')
-    failed, out, report = piuparts(sys.argv[1], sys.argv[2])
-    output.write(report.to_xml_bytes())
+        return out, analysis, failed

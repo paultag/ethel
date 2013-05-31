@@ -4,6 +4,7 @@ import importlib
 PLUGINS = {
     "build": "ethel.commands.build",
     "adequate": "ethel.commands.adequate",
+    "piuparts": "ethel.commands.piuparts",
 }
 
 

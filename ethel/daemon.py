@@ -99,6 +99,7 @@ def iterate():
                     type_ = {"sources": "source",
                              "binaries": "binary"}[package['_type']]
 
+                    print("[ethel] - filing report")
                     proxy.submit_report(firehose, log, job['_id'], err)
 
 iterate()
