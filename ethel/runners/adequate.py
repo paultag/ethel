@@ -31,4 +31,4 @@ def adequate(chroot_name, packages, analysis):
             failed = True
             analysis.results.append(issue)
 
-        return failed, out
+        return analysis, failed, out

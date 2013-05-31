@@ -93,7 +93,8 @@ def iterate():
         with tdir() as fd:
             with cd(fd):
                 with checkout(package) as target:
-                    log, err = handler(target, package, firehose)
+                    firehose, log, err = handler(target, package,
+                                                 job, firehose)
 
                     type_ = {"sources": "source",
                              "binaries": "binary"}[package['_type']]

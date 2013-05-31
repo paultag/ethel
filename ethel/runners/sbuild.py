@@ -1,7 +1,6 @@
 from ethel.utils import safe_run, run_command, tdir
 
 from firehose.model import Issue, Message, File, Location, Stats, DebianBinary
-from storz.wrapper import generate_analysis
 import firehose.parsers.gcc as fgcc
 
 from contextlib import contextmanager
@@ -80,4 +79,4 @@ def sbuild(package, dist, arch):
     out, err = out.decode('utf-8'), err.decode('utf-8')
     info = parse_sbuild_log(out, sut=sut)
 
-    return ftbfs, out, info
+    return info, out, ftbfs
