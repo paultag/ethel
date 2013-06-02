@@ -4,7 +4,7 @@ from firehose.model import (Analysis, Generator, Metadata,
 from ethel.commands import PLUGINS, load_module
 from ethel.client import get_proxy, checkout
 from contextlib import contextmanager
-from ethel.utils import tdir, cd
+from ethel.utils import tdir, cd, run_command
 from ethel.config import load
 
 import time
@@ -102,8 +102,17 @@ def iterate():
                              "binaries": "binary"}[package['_type']]
 
                     print("[ethel] - filing report")
-                    proxy.submit_report(firehose.to_json(),
-                                        log, job['_id'], err)
+                    report = proxy.submit_report(firehose.to_json(),
+                                                 job['_id'], err)
+                    remote_path = proxy.get_log_write_location(report)
+                    open('ethel-log', 'w').write(log)
+                    cmd = config['copy'].format(src='ethel-log',
+                                                dest=remote_path)
+                    out, err, ret = run_command(cmd)
+                    if ret != 0:
+                        print(out)
+                        raise Exception("SHIT.")
+
 
 def main():
     while True:
