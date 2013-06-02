@@ -22,9 +22,8 @@ def run(dsc, package, job, firehose):
         print(out)
         raise Exception("Um. No changes but no FTBFS.")
 
-    changes = changes[0]
-
-    if os.path.exists(changes):
+    if not ftbfs:
+        changes = changes[0]
         upload(changes, job['_id'])
 
     return (info, out, ftbfs)
