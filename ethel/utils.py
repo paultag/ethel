@@ -44,7 +44,8 @@ def run_command(command, stdin=None):
         kwargs['input'] = stdin.read()
 
     (output, stderr) = pipe.communicate(**kwargs)
-    output, stderr = (c.decode('utf-8') for c in (output, stderr))
+    output, stderr = (c.decode('utf-8',
+                               errors='ignore') for c in (output, stderr))
     return (output, stderr, pipe.returncode)
 
 
