@@ -8,6 +8,7 @@ def run(debs, package, job, firehose):
 
     config = load()
     all_arch = config['all-arch']
+    arch = package['arch']
     if package['arch'] == 'all':
         arch = all_arch
 
