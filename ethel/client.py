@@ -28,8 +28,8 @@ def checkout(package):
         raise ValueError("_type sucks")
 
     def source():
-        dsc = "{source}_{version}.dsc".format(**package)
         url = proxy.get_dsc(package['_id'])
+        dsc = os.path.basename(url)
         dget(url)
         yield dsc
 

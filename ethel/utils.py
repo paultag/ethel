@@ -55,6 +55,7 @@ def safe_run(cmd, expected=0):
     out, err, ret = run_command(cmd)
 
     if not ret in expected:
+        print(err)
         e = EthelSubprocessError(out, err, ret, cmd)
         raise e
 
