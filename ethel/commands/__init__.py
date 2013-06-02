@@ -3,6 +3,7 @@ import importlib
 
 PLUGINS = {
     "build": "ethel.commands.build",
+    "pep8": "ethel.commands.pep8",
 
     "lintian": "ethel.commands.lintian",
     "lintian4py": "ethel.commands.lintian4py",
