@@ -10,12 +10,17 @@ def cppcheck(dsc, analysis):
             'cppcheck', '--enable=all', '.', '--xml'
         ])
 
+        xmlbytes = err.encode()
+
         failed = False
-        for issue in parse_cppcheck(out):
+        if err.strip() == '':
+            return (analysis, err, failed)
+
+        for issue in parse_cppcheck(xmlbytes):
             analysis.results.append(issue)
             if not failed and issue.severity in [
                 'performance', 'portability', 'error', 'warning'
             ]:
                 failed = True
 
-        return (analysis, out, failed)
+        return (analysis, err, failed)
