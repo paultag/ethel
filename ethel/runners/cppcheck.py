@@ -11,7 +11,7 @@ def cppcheck(dsc, analysis):
         ])
 
         failed = False
-        for issue in parse_cppcheck(out.splitlines()):
+        for issue in parse_cppcheck(out):
             analysis.results.append(issue)
             if not failed and issue.severity in [
                 'performance', 'portability', 'error', 'warning'
