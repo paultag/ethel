@@ -5,7 +5,7 @@ import lxml.etree
 # cppcheck --enable=all . --xml 1>/dev/null  ( stderr )
 
 
-def parse_cppcheck_xml(payload):
+def parse_cppcheck(payload):
     tree = lxml.etree.fromstring(payload)
     for result in tree.xpath("//results/error"):
 
