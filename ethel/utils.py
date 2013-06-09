@@ -2,12 +2,16 @@ from ethel.error import EthelError
 
 from contextlib import contextmanager
 from debian import deb822
-import configparser
 import subprocess
 import tempfile
 import shutil
 import shlex
 import os
+
+try:
+    import configparser
+except ImportError:
+    import ConfigParser as configparser
 
 
 @contextmanager

@@ -5,7 +5,10 @@ from firehose.model import Issue, Message, File, Location
 from schroot.chroot import SchrootCommandError
 from schroot import schroot
 
-import configparser
+try:
+    import configparser
+except ImportError:
+    import ConfigParser as configparser
 
 import sys
 import os
