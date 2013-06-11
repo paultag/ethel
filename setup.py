@@ -23,6 +23,7 @@ setup(
 #            'ethel-buildd = ethel.client:buildd',
 #            'ethel-next = ethel.cli:next',
              'etheld = ethel.daemon:main',
+             'ethel-update = ethel.utils:doupdate',
 #            'ethel-close = ethel.cli:close',
 #            'ethel-submit = ethel.cli:submit',
 #            'ethel-dget-url = ethel.cli:dget',

@@ -1,17 +1,41 @@
 from ethel.error import EthelError
 
 from contextlib import contextmanager
+from schroot import schroot
 from debian import deb822
 import subprocess
 import tempfile
 import shutil
 import shlex
+import sys
 import os
 
 try:
     import configparser
 except ImportError:
     import ConfigParser as configparser
+
+
+def upgrade(chroot):
+    print("Schrooting")
+    with schroot(chroot) as chroot:
+        print("updating")
+        out, err, ret = chroot.run([
+            "apt-get", "update"
+        ], user='root')
+        print(out, err)
+        out, err, ret = chroot.run([
+            "apt-get", "upgrade", "-y"
+        ], user='root')
+        print(out, err)
+        out, err, ret = chroot.run([
+            "apt-get", "dist-upgrade", "-y"
+        ], user='root')
+        print(out, err)
+
+
+def doupdate():
+    upgrade(*sys.argv[1:])
 
 
 @contextmanager
