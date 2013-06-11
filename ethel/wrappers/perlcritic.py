@@ -13,7 +13,10 @@ LINE_EXPR = re.compile(
 
 def parse_perlcritic(lines):
     for line in lines:
-        info = LINE_EXPR.match(line).groupdict()
+        info = LINE_EXPR.match(line)
+        if info is None:
+            continue
+        info = info.groupdict()
 
         yield Issue(cwe=None,
                     testid=info['testid'],
