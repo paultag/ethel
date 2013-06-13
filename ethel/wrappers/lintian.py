@@ -3,7 +3,7 @@ import re
 
 
 LINE_RE = re.compile(
-    r"(?P<severity>.*): (?P<package>.*): (?P<testid>[^\s]+)( (?P<message>.*))?"
+    r"(?P<severity>\w): (?P<package>.*): (?P<testid>[^\s]+)( (?P<message>.*))?"
 )
 
 def parse_lintian(lines, fpath):

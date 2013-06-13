@@ -1,4 +1,4 @@
-from ethel.wrappers.cppcheck import parse_cppcheck_xml
+from ethel.wrappers.cppcheck import parse_cppcheck
 
 DATA = b"""<?xml version="1.0" encoding="UTF-8"?>
 <results>
@@ -28,5 +28,5 @@ DATA = b"""<?xml version="1.0" encoding="UTF-8"?>
 
 
 def test_xml_parse():
-    for issue in parse_cppcheck_xml(DATA):
+    for issue in parse_cppcheck(DATA):
         assert issue.testid == 'unusedFunction'
