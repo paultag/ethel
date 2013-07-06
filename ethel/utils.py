@@ -92,6 +92,8 @@ def safe_run(cmd, expected=0):
 
 
 def dget(url):
+    # TODO : add some logging here, useful to setup correctly the
+    # "public" parameter in lucy
     safe_run(["dget", "-u", "-d", url])
 
 

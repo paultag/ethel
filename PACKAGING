@@ -1,0 +1,139 @@
+What is required to install ethel.
+So that may become some hints to create the package.
+This not an "INSTALL" file as I hope we'll never have to install the system 
+like this...
+And I use virtualenvwrapper here for my sanity, preferably replaced in 
+production by installing the debian packages instead of using pip.
+
+System : fresh wheezy, up to date on 04 Jul 2013
+
+(root)
+* Create a dedicated user in the machine
+    adduser --disabled-password --disabled-login --gecos "Ethel builder,,," --home /srv/ethel ethel
+
+(ethel)
+* Fetch the repo of ethel
+    cd ~ && git clone https://github.com/paultag/ethel.git
+
+(root)
+* Create the environment we will work in :
+    apt-get install virtualenvwrapper
+
+(root)
+* Additional deps :
+    apt-get install dput devscripts lintian
+
+(ethel)
+* Reconnect as ethel for virtualenvwrapper hooks
+    mkvirtualenv ethel && workon ethel
+
+(ethel) virtualenv=ethel
+* Install ethel dependancies
+    cd ~ && git clone https://github.com/fedora-static-analysis/firehose.git
+    cd ~/firehose
+    pip install -r requirements.txt
+    python setup.py install
+    pip install configparser
+    pip install python-debian
+    pip install chardet    
+    pip install schroot
+
+
+(ethel) virtualenv=ethel
+* Install ethel
+    python setup.py develop
+
+(root)
+* Install the config file
+    cp ~/ethel/skel/ethel.ini /etc/ethel.ini
+    chown ethel:ethel /etc/ethel.ini
+
+(ethel)
+* Generate a new auto GPG key
+    gpg --gen-key (without passphrase)
+
+* Configure the conf file !
+
+SAMPLE /etc/ethel.ini :
+###############################################################
+[host]
+# The address or IP to contact lucy
+host=debian-manager.via.ecp.fr
+# The port to contact lucy
+port=20017
+
+# Authentication to lucy
+user=debian-builder1
+password=password
+
+# Where to dput, must be an entry of the ~/.dput.cf
+dput-host=debian-manager
+# Where to send the logs, the same host as dput, same path without incoming/
+copy=scp {src} lucy@debian-manager.via.ecp.fr:{dest}
+
+# The GPG key of the builder machine
+# `gpg --list-secret-keys --fingerprint | grep fingerprint | cut -d'=' -f2 | tr -d ' '`
+gpg=D0FEF8101640900183B8C37A42FE51628224AAA3
+# The keyring where this key is
+keyring=/srv/ethel/.gnupg/secring.gpg
+
+# The builder capabilities
+suites=unstable
+arches=amd64,all
+all-arch=amd64
+###############################################################
+
+* You must export the GPG key and import it in lucy keyring
+
+(ethel)
+* In the ~/dput.cf I set up debian-manager target
+
+SAMPLE ~/dput.cf :
+###############################################################
+[debian-manager]
+fqdn=debian-manager.via.ecp.fr
+login=lucy
+incoming=/srv/local-mirror/incoming
+method=scp
+###############################################################
+
+(ethel)
+* For dput-ing and scp-ing we use SSH so setup auto SSH key
+between my builder and the manager
+    ssh-keygen -t ecdsa -b 521 -N ''
+* Copy the pubkey to lucy@debian-manager (e.g.)
+* Connect to accept server host key
+
+
+(root)
+* Create a schroot file and add ethel to sbuild group
+    apt-get install sbuild
+    mkdir -p /var/lib/ethel/chroots    
+    /srv/ethel/ethel/bin/create-schroot-file unstable
+* Then we copy the configuration in /etc/schroot/chroot.d/unstable-amd64
+Yes, the name matters.
+
+SAMPLE /etc/schroot/chroot.d/unstable-amd64 :
+###############################################################
+[unstable-amd64]
+type=file
+description=Ethel Chroot
+file=/var/lib/ethel/chroots/unstable.tar.gz
+groups=root,sbuild
+root-groups=root,sbuild
+source-groups=root,sbuild
+source-root-groups=root,sbuild
+###############################################################
+
+(root)
+* Add your ethel user to the sbuild group
+    usermod -a -G sbuild ethel
+* Reconnect that the modification is taken into account
+
+* Generate a key for sbuild local archive
+    sbuild-update --keygen
+
+* Install what is required for checkers
+    # FIXME : only in experimental :/ not possible on wheezy with dependancies
+    * Install lintian4py
+            
