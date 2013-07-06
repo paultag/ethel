@@ -3,7 +3,7 @@ set -e
 
 SUITE=$1
 MIRROR=http://debian.lcs.mit.edu/debian/
-OUTPUT="/var/lib/ethel/chroots/"
+OUTPUT="/var/lib/ethel/chroots"
 VARIANT="buildd"
 TARBALL="${OUTPUT}/${SUITE}.tar.gz"
 
