@@ -1,8 +1,24 @@
 #!/bin/bash
+# This script is part of ethel.
+# It creates a chroot for the given debian suite using debootstrap, the chroot
+# is enclosed in a tarball and the according schroot configuration for ethel
+# is given.
+#
+# Usage : create-schroot-file [suite]
+#   suite being unstable, stable...
+
 set -e
+
+# FIXME : add -h option and make understandable in the script name that it is 
+#         ethel-related
+# FIXME : the sudo dependance is clearly droppable, and script run only as root
+#         file in chroot.d can be created directly
 
 SUITE=$1
 MIRROR=http://debian.lcs.mit.edu/debian/
+# TODO : we want either to take a known mirror (from sources.list)
+# or add an option to do so
+# FIXME : verify that the $OUTPUT exists, or create it here/in the package
 OUTPUT="/var/lib/ethel/chroots"
 VARIANT="buildd"
 TARBALL="${OUTPUT}/${SUITE}.tar.gz"
