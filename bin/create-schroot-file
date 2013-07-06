@@ -26,8 +26,6 @@ WHERE=$(mktemp -d)
 POP=$(pwd)
 cd ${WHERE}
 
-TARGET="chroot"
-
 sudo debootstrap \
     --verbose \
     --variant="$VARIANT" \
