@@ -2,7 +2,7 @@ from ethel.utils import tdir, cd, dget, upload, run_command
 from ethel.config import load
 
 from contextlib import contextmanager
-import xmlrpc.client
+import xmlrpclib
 import time
 import glob
 import os
@@ -10,7 +10,7 @@ import os
 
 def get_proxy():
     info = load()
-    proxy = xmlrpc.client.ServerProxy(
+    proxy = xmlrpclib.ServerProxy(
         "http://{user}:{password}@{host}:{port}/".format(
             user=info['user'],
             password=info['password'],
