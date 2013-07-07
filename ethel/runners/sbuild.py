@@ -51,8 +51,8 @@ def parse_sbuild_log(log, sut):
     return obj
 
 
-def sbuild(package, dist, arch):
-    chroot = "%s-%s" % (dist, arch)
+def sbuild(package, suite, arch):
+    chroot = "%s-%s" % (suite, arch)
 
     dsc = os.path.basename(package)
     if not dsc.endswith('.dsc'):
@@ -64,7 +64,7 @@ def sbuild(package, dist, arch):
     if "-" in version:
         version, local = version.rsplit("-", 1)
 
-    dist, arch = chroot.split("-", 1)
+    suite, arch = chroot.split("-", 1)
     sut = DebianBinary(source, version, local, arch)
 
     out, err, ret = run_command([
@@ -72,7 +72,7 @@ def sbuild(package, dist, arch):
         "-A",
         "-c", chroot,
         "-v",
-        "-d", dist,
+        "-d", suite,
         "-j", "8",
         package,
     ])
