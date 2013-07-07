@@ -105,7 +105,7 @@ def iterate():
                     report = proxy.submit_report(firehose.to_json(),
                                                  job['_id'], err)
                     remote_path = proxy.get_log_write_location(report)
-                    open('ethel-log', 'w').write(log)
+                    open('ethel-log', 'wb').write(log.encode('utf-8'))
                     cmd = config['copy'].format(src='ethel-log',
                                                 dest=remote_path)
                     out, err, ret = run_command(cmd)
