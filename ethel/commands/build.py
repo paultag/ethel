@@ -1,4 +1,4 @@
-from ethel.runners.sbuild import sbuild
+from ethel.runners.sbuild import sbuild, version
 from ethel.utils import upload
 import glob
 import os
@@ -27,3 +27,6 @@ def run(dsc, package, job, firehose):
         upload(changes, job['_id'])
 
     return (info, out, ftbfs)
+
+def get_version():
+    return version()

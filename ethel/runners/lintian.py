@@ -17,3 +17,12 @@ def lintian(packages, analysis, lintian_binary='lintian'):
         log += out
 
     return (analysis, log, failed)
+
+
+def version(lintian_binary='lintian'):
+    out, err, ret = run_command([
+        lintian_binary, '--version'
+    ])
+    #TODO: if ret != 0, not installed !
+    name, version = out.split(" ")
+    return (name, version.strip())

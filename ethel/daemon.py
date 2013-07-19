@@ -7,6 +7,7 @@ from contextlib import contextmanager
 from ethel.utils import tdir, cd, run_command
 from ethel.config import load
 
+import logging
 import time
 
 config = load()
@@ -23,20 +24,20 @@ def listize(entry):
 
 
 @contextmanager
-def workon(suites, arches, things):
-    job = proxy.get_next_job(suites, arches, things)
+def workon(suites, arches, capabilities):
+    job = proxy.get_next_job(suites, arches, capabilities)
     if job is None:
         yield
     else:
-        print("[ethel] aquired job %s (%s) for %s/%s" % (
-            job['_id'], job['type'], job['suite'], job['arch']))
-
+        logging.info("Acquired job %s (%s) for %s/%s", job['_id'], job['type'], job['suite'], job['arch'])
         try:
             yield job
         except:
+            logging.warn("Forfeiting the job because of internal exception")
             proxy.forfeit_job(job['_id'])
             raise
         else:
+            logging.info("Successfully closing the job")
             proxy.close_job(job['_id'])
 
 
@@ -60,14 +61,18 @@ def generate_sut_from_binary(package):
     return DebianBinary(name, version, local, arch)
 
 
-def create_firehose(package):
+def create_firehose(package, version_getter):
+    logging.info("Initializing empty firehose report")
     sut = {
         "sources": generate_sut_from_source,
         "binaries": generate_sut_from_binary
     }[package['_type']](package)
 
+    gname_, gversion = version_getter()
+    gname = "ethel/%s" % gname_
+
     return Analysis(metadata=Metadata(
-        generator=Generator(name="ethel", version="fixme"),
+        generator=Generator(name=gname, version=gversion),
         sut=sut, file_=None, stats=None), results=[])
 
 
@@ -81,6 +86,7 @@ def iterate():
         package_id = job['package']
         type_ = job['package_type']
 
+        logging.debug("Fetching the %s package, id=%s", type_, package_id)
         package = None
         if type_ == 'binary':
             package = proxy.get_binary_package(package_id)
@@ -89,8 +95,8 @@ def iterate():
         else:
             raise IDidNothingError("SHIT")
 
-        handler = load_module(job['type'])
-        firehose = create_firehose(package)
+        handler, version_getter = load_module(job['type'])
+        firehose = create_firehose(package, version_getter)
 
         with tdir() as fd:
             with cd(fd):
@@ -101,9 +107,18 @@ def iterate():
                     type_ = {"sources": "source",
                              "binaries": "binary"}[package['_type']]
 
-                    print("[ethel] - filing report")
+                    logging.info("Job worker returned, filing reports")
                     report = proxy.submit_report(firehose.to_json(),
                                                  job['_id'], err)
+
+                    logging.info("Sending the XML firehose report to the pool")
+                    open('firehose.xml', 'w').write(firehose.to_xml_bytes())
+                    remote_firehose_path = proxy.get_firehose_write_location(report)
+                    cmd = config['copy'].format(src='firehose.xml',
+                                                dest=remote_firehose_path)
+                    out, err, ret = run_command(cmd)
+
+                    logging.info("Sending the logs to the pool")
                     remote_path = proxy.get_log_write_location(report)
                     open('ethel-log', 'wb').write(log.encode('utf-8'))
                     cmd = config['copy'].format(src='ethel-log',
@@ -115,9 +130,12 @@ def iterate():
 
 
 def main():
+    logging.basicConfig(format='%(asctime)s - %(levelname)8s - [ethel] %(message)s', level=logging.DEBUG)
+    logging.info("Booting ethel daemon")
     while True:
+        logging.debug("Checking for new jobs")
         try:
             iterate()
         except IDidNothingError:
-            #print("[ethel] nothing to do.")
+            logging.debug("Nothing to do for now, sleeping 30s")
             time.sleep(30)

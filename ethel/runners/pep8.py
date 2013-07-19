@@ -13,3 +13,10 @@ def pep8(dsc, analysis):
             analysis.results.append(issue)
 
         return (analysis, out, failed)
+
+def version():
+    out, err, ret = run_command([
+        'pep8', '--version'
+    ])
+    #TODO: if ret != 0, not installed !
+    return ('pep8', out.strip())
