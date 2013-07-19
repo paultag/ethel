@@ -24,3 +24,11 @@ def cppcheck(dsc, analysis):
                 failed = True
 
         return (analysis, err, failed)
+
+def version():
+    out, err, ret = run_command([
+        'cppcheck', '--version'
+    ])
+    #TODO: if ret != 0, not installed !
+    name, version = out.split(" ")
+    return (name, version.strip())

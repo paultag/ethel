@@ -59,3 +59,7 @@ def piuparts(chroot, packages, analysis):
             analysis.results.append(x)
 
         return analysis, out, failed
+
+def version():
+    #TODO
+    return ('piuparts', 'n/a')

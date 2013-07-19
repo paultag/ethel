@@ -18,3 +18,8 @@ def perlcritic(dsc, analysis):
             analysis.results.append(issue)
 
         return (analysis, out, failed)
+
+def version():
+    out, err, ret = run_command([ 'perlcritic', '--version' ])
+    #TODO : check ret for perlcritic installation
+    return ('perlcritic', out.strip())

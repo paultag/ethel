@@ -1,4 +1,4 @@
-from ethel.runners.adequate import adequate
+from ethel.runners.adequate import adequate, version
 from ethel.config import load
 
 
@@ -17,3 +17,6 @@ def run(debs, package, job, firehose):
         arch=arch
     )
     return adequate(chroot_name, debs, firehose)
+
+def get_version():
+    return version()

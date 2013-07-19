@@ -15,3 +15,7 @@ def desktop_file_validate(package_root, analysis):
             log += out
     log = log.strip()
     return (analysis, log, failed)
+
+def version():
+    #TODO
+    return ('desktop_file_validate', 'n/a')

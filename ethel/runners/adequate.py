@@ -32,3 +32,7 @@ def adequate(chroot_name, packages, analysis):
             analysis.results.append(issue)
 
         return analysis, out, failed
+
+def version():
+    #TODO
+    return ('adequate', 'n/a')

@@ -1,4 +1,4 @@
-from ethel.runners.piuparts import piuparts
+from ethel.runners.piuparts import piuparts, version
 from ethel.config import load
 
 
@@ -18,3 +18,6 @@ def run(debs, package, job, firehose):
     )
 
     return piuparts(chroot_name, debs, firehose)
+
+def get_version():
+    return version()

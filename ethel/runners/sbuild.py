@@ -12,7 +12,7 @@ import os
 
 
 STATS = re.compile("Build needed (?P<time>.*), (?P<space>.*) dis(c|k) space")
-
+VERSION = re.compile("sbuild \(Debian sbuild\) (?P<version>)")
 
 def parse_sbuild_log(log, sut):
     gccversion = None
@@ -80,3 +80,15 @@ def sbuild(package, suite, arch):
     info = parse_sbuild_log(out, sut=sut)
 
     return info, out, ftbfs
+
+# FIXME: do we want to use sbuild version and/or compiler version
+# see gcc version in parse_sbuild_log
+def version():
+    out, err, ret = run_command([
+        "sbuild", '--version'
+    ])
+    # TODO check ret
+    vline = out.splitlines()[0]
+    v = VERSION.match(vline)
+    vdict = v.groupdict()
+    return ('sbuild', vdict['version'])
