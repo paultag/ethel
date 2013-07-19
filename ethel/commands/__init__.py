@@ -3,6 +3,8 @@ import importlib
 
 PLUGINS = {
     "build": "ethel.commands.build",
+    "clanganalyzer": "ethel.commands.clanganalyzer",
+
     "pep8": "ethel.commands.pep8",
     "perlcritic": "ethel.commands.perlcritic",
     "cppcheck": "ethel.commands.cppcheck",
