@@ -1,4 +1,4 @@
-from ethel.runners.clanganalyzer import clanganalyzer
+from ethel.runners.clanganalyzer import clanganalyzer, version
 
 
 # target package firehose
@@ -8,3 +8,6 @@ def run(dsc, package, job, firehose):
     arch = 'amd64'
 
     return clanganalyzer(dsc, suite, arch, firehose)
+
+def get_version():
+    version()

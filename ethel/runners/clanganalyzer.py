@@ -82,3 +82,8 @@ def clanganalyzer(package, suite, arch, analysis):
             shutil.rmtree(reports_dir[0])
 
         return analysis, out, failed
+
+
+def version():
+    # TODO
+    return ('clanganalyzer', 'n/a')
