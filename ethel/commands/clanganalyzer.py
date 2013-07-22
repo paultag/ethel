@@ -10,4 +10,4 @@ def run(dsc, package, job, firehose):
     return clanganalyzer(dsc, suite, arch, firehose)
 
 def get_version():
-    version()
+    return version()
